@@ -51,11 +51,22 @@ public class Product {
         return name.equals(prod.getName()) && price == prod.getPrice() &&
                 category.equals(prod.getCategory()) && available == prod.getAvailable();
     }
-    public String[] search(String searchText) {
-        
-        if (contains(id, searchText) || contains(name, searchText) || contains(price, searchText) ||
-                contains(category, searchText) || contains(available, searchText)) {
-            
+    // search for product by every data of it
+    public String[] searchByEverything(String searchText) {
+        return search(contains(id, searchText) || contains(name, searchText) || contains(price, searchText) ||
+                contains(category, searchText) || contains(available, searchText));
+    }
+    // search for a product by name
+    public String[] searchByName(String searchValue) {
+        return search(contains(name, searchValue));
+    }
+    // search for a product by category
+    public String[] searchByCategory(String searchValue) {
+        return search(contains(category, searchValue));
+    }
+    // return a String[] if the given condition is true
+    private String[] search(boolean condition) {
+        if (condition) {
             String response[] = {
                 String.valueOf(id),
                 name,
@@ -63,15 +74,15 @@ public class Product {
                 category,
                 String.valueOf(available)
             };
-            
             return response;
         }
-        
         return null;
     }
+    // return true if the given text is included in the given value (Integer)
     private boolean contains(int value, String searchText) {
         return String.valueOf(value).toLowerCase().contains(searchText.toLowerCase());
     }
+    // return true if the given text is included in the given value (String)
     private boolean contains(String value, String searchText) {
         return value.toLowerCase().contains(searchText.toLowerCase());
     }

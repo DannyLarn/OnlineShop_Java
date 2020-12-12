@@ -67,12 +67,18 @@ public class Storage {
         List<String[]> response = new ArrayList<>();
         
         for (Product prod : products) {
-            String array[] = prod.search(searchValue);
+            String array[] = prod.searchByEverything(searchValue);
             if (array != null) {
                 response.add(array);
             }
         }
         return response;
+    }
+    public List<String[]> searchByName(String searchValue) {
+        
+        
+        
+        return null;
     }
     public Product getElementById(int id) {
         for (Product prod : products)
