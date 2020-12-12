@@ -31,6 +31,9 @@ public class Cart {
             cartElements.add(added);
         }
     }
+    public void remove(int id) {
+        cartElements.remove(id);
+    }
     
     // var functions:
     

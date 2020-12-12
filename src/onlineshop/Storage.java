@@ -63,6 +63,20 @@ public class Storage {
     
     // var functions:
     // return a list of string arrays if the searched text is included in the id, name, price, category or available
+    public List<String[]> getAllProducts() {
+        List<String[]> response = new ArrayList();
+        for (Product prod : products) {
+            String array[] = {
+                String.valueOf(prod.getId()),
+                prod.getName(),
+                String.valueOf(prod.getPrice()) + "Ft",
+                prod.getCategory(),
+                String.valueOf(prod.getAvailable()) + "db"
+            };
+            response.add(array);
+        }
+        return response;
+    }
     public List<String[]> searchByEverything(String searchValue) {
         List<String[]> response = new ArrayList<>();
         

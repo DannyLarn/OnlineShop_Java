@@ -1,6 +1,9 @@
 package onlineshop;
 
 import java.awt.Cursor;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import javax.swing.JList;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,13 +22,35 @@ public class MainWindow extends javax.swing.JFrame {
     /**
      * Creates new form MainWindow
      */
+    private final Storage testStorage;
     public MainWindow() {
         initComponents();
         
-        Storage testStorage = new Storage();
+        testStorage = new Storage();
         testStorage.testList();
+        
+        setTable();
+        
+        setMenu(homePanel);
     }
 
+    private void setTable() {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        
+        model.setColumnCount(0);
+        model.setRowCount(0);
+        
+        String identifiers[] = {"Id", "Name", "Price", "Category", "Available"};
+        model.setColumnIdentifiers(identifiers);
+        
+        List<String[]> products = testStorage.getAllProducts();
+        
+        for (String prod[] : products) {
+            model.addRow(prod);
+        }
+        table.setEnabled(true);
+    }
+    
     private void setMenu(javax.swing.JPanel panel) {        
         homePanel.setVisible(homePanel.equals(panel));
         shopPanel.setVisible(shopPanel.equals(panel));
@@ -424,6 +449,8 @@ public class MainWindow extends javax.swing.JFrame {
             if (index >= 0) {
                 Object o = theList.getModel().getElementAt(index);
             }
+        } else if (evt.getClickCount() == 2) {
+            
         }
     }//GEN-LAST:event_listMouseClicked
 
