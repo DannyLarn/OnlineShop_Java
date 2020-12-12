@@ -1,10 +1,17 @@
 package onlineshop;
 
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Cursor;
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javax.swing.DefaultCellEditor;
 import javax.swing.JList;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -48,7 +55,10 @@ public class MainWindow extends javax.swing.JFrame {
         for (String prod[] : products) {
             model.addRow(prod);
         }
-        table.setEnabled(true);
+        
+        table.getTableHeader().setReorderingAllowed(false);
+        
+        table.setEnabled(false);
     }
     
     private void setMenu(javax.swing.JPanel panel) {        
@@ -100,6 +110,18 @@ public class MainWindow extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3"
             }
         ));
+        table.setDragEnabled(true);
+        table.setRequestFocusEnabled(false
+        );
+        table.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        /*
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableMouseClicked(evt);
+            }
+        });
+        */
+
         table.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tableMouseClicked(evt);
@@ -111,17 +133,17 @@ public class MainWindow extends javax.swing.JFrame {
         homePanel.setLayout(homePanelLayout);
         homePanelLayout.setHorizontalGroup(
             homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(homePanelLayout.createSequentialGroup()
-                .addGap(93, 93, 93)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, homePanelLayout.createSequentialGroup()
+                .addContainerGap(69, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addGap(52, 52, 52))
         );
         homePanelLayout.setVerticalGroup(
             homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(homePanelLayout.createSequentialGroup()
-                .addGap(65, 65, 65)
+                .addContainerGap(53, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(102, Short.MAX_VALUE))
+                .addGap(37, 37, 37))
         );
 
         shopPanel.setBackground(new java.awt.Color(204, 0, 0));
@@ -194,7 +216,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(cartPanelLayout.createSequentialGroup()
                 .addGap(107, 107, 107)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(336, Short.MAX_VALUE))
+                .addContainerGap(358, Short.MAX_VALUE))
         );
         cartPanelLayout.setVerticalGroup(
             cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -360,7 +382,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Monaco", 0, 24)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Laci hulye");
+        jLabel4.setText("nem");
 
         javax.swing.GroupLayout logoLayout = new javax.swing.GroupLayout(logo);
         logo.setLayout(logoLayout);
@@ -395,7 +417,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sideBarLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
                 .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -426,14 +448,23 @@ public class MainWindow extends javax.swing.JFrame {
         //        System.out.println(value);
 
         int row = table.rowAtPoint(evt.getPoint());
-        int column = table.columnAtPoint(evt.getPoint());
+        int col = table.columnAtPoint(evt.getPoint());
 
         String value = table.getModel().getValueAt(row, 0).toString();
         DefaultTableModel model = (DefaultTableModel) table.getModel();
+        
+//        table.setBackground(Color.red);
+
+        if (row >= 0 && col >= 0) {
+
+                
+          
+        }
+
         System.out.println(value);
 
     }//GEN-LAST:event_tableMouseClicked
-
+    
     private void table1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table1MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_table1MouseClicked
@@ -445,6 +476,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void listMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listMouseClicked
         JList theList = (JList) evt.getSource();
         if (evt.getClickCount() == 1) {
+            
             int index = theList.locationToIndex(evt.getPoint());
             if (index >= 0) {
                 Object o = theList.getModel().getElementAt(index);
