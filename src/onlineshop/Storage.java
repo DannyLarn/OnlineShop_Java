@@ -27,7 +27,6 @@ public class Storage {
     public Storage() {
         products = new ArrayList();
         readProductsFromFile("./src/onlineshop/Files/storage.json");
-        // ./src/storageautomatic/Files/storage.json
     }
     
     // void functions:
