@@ -10,7 +10,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.swing.DefaultCellEditor;
+import javax.swing.JDialog;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -29,11 +31,16 @@ public class MainWindow extends javax.swing.JFrame {
     /**
      * Creates new form MainWindow
      */
+    
     private final Storage testStorage;
+    private final Cart cart;
+    
     public MainWindow() {
         initComponents();
         
         testStorage = new Storage();
+        cart = new Cart(testStorage);
+        
         testStorage.testList();
         
         List<String[]> asd = testStorage.searchByName("k");
@@ -42,6 +49,7 @@ public class MainWindow extends javax.swing.JFrame {
                 System.out.println(a[0] + " " + a[1] + " " + a[2] + " " + a[3] + " " + a[4]);
             });
         }
+       
         
         
 //        setTable();
@@ -95,6 +103,7 @@ public class MainWindow extends javax.swing.JFrame {
         myCheck = new javax.swing.JCheckBox();
         jScrollPane2 = new javax.swing.JScrollPane();
         list = new javax.swing.JList<>();
+        buySomething = new javax.swing.JButton();
         sideBar = new javax.swing.JPanel();
         menu = new javax.swing.JPanel();
         homeMenuPoint = new javax.swing.JPanel();
@@ -191,20 +200,28 @@ public class MainWindow extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(list);
 
+        buySomething.setText("vegyunk kiflit");
+        buySomething.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buySomethingActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout cartPanelLayout = new javax.swing.GroupLayout(cartPanel);
         cartPanel.setLayout(cartPanelLayout);
         cartPanelLayout.setHorizontalGroup(
             cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cartPanelLayout.createSequentialGroup()
+                .addGap(107, 107, 107)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(429, Short.MAX_VALUE))
+            .addGroup(cartPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buySomething)
                     .addComponent(myCheck)
                     .addComponent(answer))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(cartPanelLayout.createSequentialGroup()
-                .addGap(107, 107, 107)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(358, Short.MAX_VALUE))
         );
         cartPanelLayout.setVerticalGroup(
             cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,7 +232,9 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(answer)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(myCheck)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
+                .addComponent(buySomething)
+                .addGap(112, 112, 112))
         );
 
         javax.swing.GroupLayout menuPanelsLayout = new javax.swing.GroupLayout(menuPanels);
@@ -485,6 +504,21 @@ public class MainWindow extends javax.swing.JFrame {
         setCursor(Cursor.HAND_CURSOR);
     }//GEN-LAST:event_cartMenuPointMouseEntered
 
+    private void buySomethingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buySomethingActionPerformed
+        // TODO add your handling code here:
+        try {
+            cart.add(3, 6);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            JOptionPane optionPane = new JOptionPane(e.getMessage(), JOptionPane.ERROR_MESSAGE);
+            JDialog dialog = optionPane.createDialog("Mennyiseg hiba!");
+            dialog.setLocationByPlatform(true);
+            dialog.setLocationRelativeTo(this);
+            dialog.setAlwaysOnTop(true); // to show top of all other application
+            dialog.setVisible(true); // to visible the dialog
+        }
+    }//GEN-LAST:event_buySomethingActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -522,6 +556,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel answer;
+    private javax.swing.JButton buySomething;
     private javax.swing.JPanel cartMenuPoint;
     private javax.swing.JPanel cartPanel;
     private javax.swing.JPanel homeMenuPoint;
@@ -544,4 +579,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel sideBar;
     private javax.swing.JTable table1;
     // End of variables declaration//GEN-END:variables
+
+    private void JOptionPane(Object object, String message) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

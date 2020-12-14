@@ -47,6 +47,11 @@ public class Product {
         return available;
     }
     
+    // setter functions:
+    public void setAvailable(int available) {
+        this.available = available;
+    }
+    
     // void functions:
     
     // var functions:

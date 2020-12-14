@@ -56,9 +56,18 @@ public class Storage {
         products.add(product);
     }
     // finalize the purchase it removes the give quantity of Products from Storage by the List of cart
-    public void purchase(List<Product> cartElements) {
+    public void purchase(List<Product> cartElements) throws Exception {
         for (Product cartElement : cartElements) {
-            
+            Product foundProd = getElementById(cartElement.getId());
+            if (foundProd != null) {
+                
+                if (foundProd.getAvailable() == 0) {
+                    cartElements.remove(foundProd.getId());
+                    throw new Exception("A(z) " + foundProd.getName() + " idokozben elfogyott.");
+                }
+                
+                foundProd.setAvailable(foundProd.getAvailable() - cartElement.getAvailable());
+            }
         }
     }
     
