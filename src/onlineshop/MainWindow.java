@@ -36,29 +36,37 @@ public class MainWindow extends javax.swing.JFrame {
         testStorage = new Storage();
         testStorage.testList();
         
-        setTable();
+        List<String[]> asd = testStorage.searchByName("k");
+        if (asd != null) {
+            asd.forEach((a) -> {
+                System.out.println(a[0] + " " + a[1] + " " + a[2] + " " + a[3] + " " + a[4]);
+            });
+        }
+        
+        
+//        setTable();
         
         setMenu(homePanel);
     }
 
     private void setTable() {
-        DefaultTableModel model = (DefaultTableModel) table.getModel();
-        
-        model.setColumnCount(0);
-        model.setRowCount(0);
-        
-        String identifiers[] = {"Id", "Name", "Price", "Category", "Available"};
-        model.setColumnIdentifiers(identifiers);
-        
-        List<String[]> products = testStorage.getAllProducts();
-        
-        for (String prod[] : products) {
-            model.addRow(prod);
-        }
-        
-        table.getTableHeader().setReorderingAllowed(false);
-        
-        table.setEnabled(false);
+//        DefaultTableModel model = (DefaultTableModel) table.getModel();
+//        
+//        model.setColumnCount(0);
+//        model.setRowCount(0);
+//        
+//        String identifiers[] = {"Id", "Name", "Price", "Category", "Available"};
+//        model.setColumnIdentifiers(identifiers);
+//        
+//        List<String[]> products = testStorage.getAllProducts();
+//        
+//        for (String prod[] : products) {
+//            model.addRow(prod);
+//        }
+//        
+//        table.getTableHeader().setReorderingAllowed(false);
+//        
+//        table.setEnabled(false);
     }
     
     private void setMenu(javax.swing.JPanel panel) {        
@@ -77,8 +85,8 @@ public class MainWindow extends javax.swing.JFrame {
 
         menuPanels = new javax.swing.JPanel();
         homePanel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        table = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
         shopPanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         table1 = new javax.swing.JTable();
@@ -102,48 +110,28 @@ public class MainWindow extends javax.swing.JFrame {
 
         homePanel.setBackground(new java.awt.Color(204, 255, 255));
 
-        table.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3"
-            }
-        ));
-        table.setDragEnabled(true);
-        table.setRequestFocusEnabled(false
-        );
-        table.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        /*
-        table.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableMouseClicked(evt);
-            }
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
         });
-        */
-
-        table.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(table);
+        jScrollPane4.setViewportView(jList1);
 
         javax.swing.GroupLayout homePanelLayout = new javax.swing.GroupLayout(homePanel);
         homePanel.setLayout(homePanelLayout);
         homePanelLayout.setHorizontalGroup(
             homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, homePanelLayout.createSequentialGroup()
-                .addContainerGap(69, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52))
+                .addContainerGap(148, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(138, 138, 138))
         );
         homePanelLayout.setVerticalGroup(
             homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(homePanelLayout.createSequentialGroup()
-                .addContainerGap(53, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
+                .addGap(135, 135, 135)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(154, Short.MAX_VALUE))
         );
 
         shopPanel.setBackground(new java.awt.Color(204, 0, 0));
@@ -439,31 +427,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
-
-        //        int column = table.getSelectedColumn();
-        //        int row = table.getSelectedRow();
-        //        String value = table.getModel().getValueAt(row, column).toString();
-        //        System.out.println(value);
-
-        int row = table.rowAtPoint(evt.getPoint());
-        int col = table.columnAtPoint(evt.getPoint());
-
-        String value = table.getModel().getValueAt(row, 0).toString();
-        DefaultTableModel model = (DefaultTableModel) table.getModel();
-        
-//        table.setBackground(Color.red);
-
-        if (row >= 0 && col >= 0) {
-
-                
-          
-        }
-
-        System.out.println(value);
-
-    }//GEN-LAST:event_tableMouseClicked
     
     private void table1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table1MouseClicked
         // TODO add your handling code here:
@@ -567,9 +530,10 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JList<String> list;
     private javax.swing.JPanel logo;
     private javax.swing.JPanel menu;
@@ -578,7 +542,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel shopMenuPoint;
     private javax.swing.JPanel shopPanel;
     private javax.swing.JPanel sideBar;
-    private javax.swing.JTable table;
     private javax.swing.JTable table1;
     // End of variables declaration//GEN-END:variables
 }

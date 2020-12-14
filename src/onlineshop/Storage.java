@@ -9,6 +9,8 @@ import com.sun.javafx.scene.control.skin.VirtualFlow;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.*;
 import java.util.function.Consumer;
 import org.json.simple.JSONArray;
@@ -77,23 +79,40 @@ public class Storage {
         }
         return response;
     }
+    
     public List<String[]> searchByEverything(String searchValue) {
+        return search("Everything", searchValue);
+    }
+    public List<String[]> searchByName(String searchValue) {
+        return search("Name", searchValue);
+    }
+    public List<String[]> searchByCategory(String searchValue) {
+        return search("Category", searchValue);
+    }
+    // return a List<String[]> 
+    public List<String[]> search(String functionString, String searchValue) {
         List<String[]> response = new ArrayList<>();
+        boolean hasError = false;
         
         for (Product prod : products) {
-            String array[] = prod.searchByEverything(searchValue);
+            String array[] = new String[5];
+            
+            switch (functionString) {
+                case "Everything": array = prod.searchByEverything(searchValue); break;
+                case "Category": array = prod.searchByCategory(searchValue); break;
+                case "Name": array = prod.searchByName(searchValue); break;
+                default: hasError = true; break;
+            }
+            
             if (array != null) {
                 response.add(array);
             }
         }
+        if (hasError) System.out.println("Storage search function error!");
+        
         return response;
     }
-    public List<String[]> searchByName(String searchValue) {
-        
-        
-        
-        return null;
-    }
+    // return a Product which id equals the functions parameter id
     public Product getElementById(int id) {
         for (Product prod : products)
             if (prod.getId() == id)

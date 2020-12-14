@@ -12,11 +12,11 @@ package onlineshop;
  */
 public class Product {
     // variables:
-    private final int id;
-    private final String name;
-    private final int price;
-    private final String category;
-    private final int available;
+    private int id;
+    private String name;
+    private int price;
+    private String category;
+    private int available;
 
     // constructors:
     public Product(int id, String name, int price, String category, int available) {
@@ -25,6 +25,9 @@ public class Product {
         this.price = price;
         this.category = category;
         this.available = available;
+    }
+    public Product() {
+        
     }
     
     // getters for variables:
