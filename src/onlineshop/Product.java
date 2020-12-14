@@ -70,13 +70,7 @@ public class Product {
     // return a String[] if the given condition is true
     private String[] search(boolean condition) {
         if (condition) {
-            String response[] = {
-                String.valueOf(id),
-                name,
-                String.valueOf(price) + "Ft",
-                category,
-                String.valueOf(available) + "db"
-            };
+            String response[] = outputArray();
             return response;
         }
         return null;
@@ -88,6 +82,16 @@ public class Product {
     // return true if the given text is included in the given value (String)
     private boolean contains(String value, String searchText) {
         return value.toLowerCase().contains(searchText.toLowerCase());
+    }
+    public String[] outputArray() {
+        String response[] = {
+            String.valueOf(id),
+            name,
+            String.valueOf(price) + "Ft",
+            category,
+            String.valueOf(available) + "db"
+        };
+        return response;
     }
     
     // test funcitons:

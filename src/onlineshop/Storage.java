@@ -5,14 +5,8 @@
  */
 package onlineshop;
 
-import com.sun.javafx.scene.control.skin.VirtualFlow;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.*;
-import java.util.function.Consumer;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -61,25 +55,15 @@ public class Storage {
     private void upload(Product product) {
         products.add(product);
     }
-    
-    
-    // var functions:
-    // return a list of string arrays if the searched text is included in the id, name, price, category or available
-    public List<String[]> getAllProducts() {
-        List<String[]> response = new ArrayList();
-        for (Product prod : products) {
-            String array[] = {
-                String.valueOf(prod.getId()),
-                prod.getName(),
-                String.valueOf(prod.getPrice()) + "Ft",
-                prod.getCategory(),
-                String.valueOf(prod.getAvailable()) + "db"
-            };
-            response.add(array);
+    // finalize the purchase it removes the give quantity of Products from Storage by the List of cart
+    public void purchase(List<Product> cartElements) {
+        for (Product cartElement : cartElements) {
+            
         }
-        return response;
     }
     
+    // var functions:
+    // inspect every arguments of Products and return with a List<String[]>
     public List<String[]> searchByEverything(String searchValue) {
         return search("Everything", searchValue);
     }
@@ -89,7 +73,7 @@ public class Storage {
     public List<String[]> searchByCategory(String searchValue) {
         return search("Category", searchValue);
     }
-    // return a List<String[]> 
+    // return a Products of List<String[]> with the given search type
     public List<String[]> search(String functionString, String searchValue) {
         List<String[]> response = new ArrayList<>();
         boolean hasError = false;
@@ -124,7 +108,7 @@ public class Storage {
     // testing functions:
     // list the name of all products to output
     public void testList() {
-        products.forEach((prod) -> {
+        products.forEach(prod -> {
             prod.logAllData();
         });
     }
