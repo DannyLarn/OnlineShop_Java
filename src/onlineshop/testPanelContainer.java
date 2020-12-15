@@ -5,10 +5,9 @@
  */
 package onlineshop;
 
-import java.awt.Component;
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JPanel;
 
 /**
  *
@@ -19,7 +18,7 @@ public class testPanelContainer extends javax.swing.JPanel {
     /**
      * Creates new form testPanelContainer
      */
-    private List<onlineshop.TestPanel> testPanels;
+    private final List<onlineshop.ShopProductElement> testPanels;
     
     public testPanelContainer() {
         testPanels = new ArrayList();
@@ -31,20 +30,29 @@ public class testPanelContainer extends javax.swing.JPanel {
     }
 
     public void addRow(String rowLabels[]) {
-        testPanels.add(new onlineshop.TestPanel());
+        testPanels.add(new onlineshop.ShopProductElement());
         getLastPanel().setLabels(rowLabels);
-        getLastPanel().setLocation(0, getPenultPanel().getY() + 30);
+        if (testPanels.size() == 1) {
+            getLastPanel().setLocation(0, 6);
+            container.setPreferredSize(new Dimension(container.getPreferredSize().width, container.getPreferredSize().height + 12));
+        } else {
+            getLastPanel().setLocation(0, getPenultPanel().getY() + 31);
+        }
+        
+        getLastPanel().setPreferredSize(new Dimension(jScrollPane1.getSize().width - 20, 31));
+        container.setPreferredSize(new Dimension(container.getPreferredSize().width, container.getPreferredSize().height + 31));
 //        getLastPanel().setSize(new Dimension());
-        this.add(getLastPanel());
+        
+        container.add(getLastPanel());
         getLastPanel().setVisible(true);
         
     }
 
-    private onlineshop.TestPanel getLastPanel() {
+    private onlineshop.ShopProductElement getLastPanel() {
         return testPanels.get(testPanels.size() - 1);
     }
     
-    private onlineshop.TestPanel getPenultPanel() {
+    private onlineshop.ShopProductElement getPenultPanel() {
         if (testPanels.size() > 1) {
             return testPanels.get(testPanels.size() - 2);
         } else {
@@ -60,27 +68,50 @@ public class testPanelContainer extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        testPanel2 = new onlineshop.TestPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        container = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setSize(new java.awt.Dimension(400, 300));
+        setMinimumSize(new java.awt.Dimension(622, 200));
+        setPreferredSize(new java.awt.Dimension(622, 200));
+        setSize(new java.awt.Dimension(622, 200));
+
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        jScrollPane1.setHorizontalScrollBar(null);
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(0, 0));
+        jScrollPane1.setSize(new java.awt.Dimension(0, 0));
+
+        container.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout containerLayout = new javax.swing.GroupLayout(container);
+        container.setLayout(containerLayout);
+        containerLayout.setHorizontalGroup(
+            containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        containerLayout.setVerticalGroup(
+            containerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jScrollPane1.setViewportView(container);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(testPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 594, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(testPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(356, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private onlineshop.TestPanel testPanel2;
+    private javax.swing.JPanel container;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

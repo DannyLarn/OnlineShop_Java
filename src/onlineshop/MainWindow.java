@@ -50,14 +50,14 @@ public class MainWindow extends javax.swing.JFrame {
         testStorage.testList();
         
         
-        DefaultListModel listModel = new DefaultListModel();
+//        DefaultListModel listModel = new DefaultListModel();
         
         List<String[]> asd = testStorage.searchByName("");
         if (asd != null) {
             asd.forEach((a) -> {
                 System.out.println(a[0] + " " + a[1] + " " + a[2] + " " + a[3] + " " + a[4]);
-                listModel.addElement(a);
-                testPanel1.setLabels(a);
+//                listModel.addElement(a);
+//                testPanel1.setLabels(a);
                 testPanelContainer2.addRow(a);
             });
         }
@@ -92,11 +92,10 @@ public class MainWindow extends javax.swing.JFrame {
 //        table.setEnabled(false);
     }
     
-    private void setMenu(JPanel chosenPanel) {
-        menuPanels.removeAll();
-        menuPanels.add(chosenPanel);
-        menuPanels.repaint();
-        menuPanels.revalidate();
+    private void setMenu(JPanel panel) {
+        homePanel.setVisible(homePanel.equals(panel));
+        shopPanel.setVisible(shopPanel.equals(panel));
+        cartPanel.setVisible(cartPanel.equals(panel));
     }
     /**
      * This method is called from within the constructor to initialize the form. WARNING: Do NOT modify this code. The
@@ -108,8 +107,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         menuPanels = new javax.swing.JPanel();
         homePanel = new javax.swing.JPanel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
-        testPanel1 = new onlineshop.TestPanel();
         testPanelContainer2 = new onlineshop.testPanelContainer();
         shopPanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -134,38 +131,8 @@ public class MainWindow extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         homePanel.setBackground(new java.awt.Color(204, 255, 255));
-
-        jFormattedTextField1.setText("jFormattedTextField1");
-
-        javax.swing.GroupLayout homePanelLayout = new javax.swing.GroupLayout(homePanel);
-        homePanel.setLayout(homePanelLayout);
-        homePanelLayout.setHorizontalGroup(
-            homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, homePanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(testPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66))
-            .addGroup(homePanelLayout.createSequentialGroup()
-                .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(homePanelLayout.createSequentialGroup()
-                        .addGap(94, 94, 94)
-                        .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(homePanelLayout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addComponent(testPanelContainer2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(87, Short.MAX_VALUE))
-        );
-        homePanelLayout.setVerticalGroup(
-            homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(homePanelLayout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(testPanelContainer2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(78, 78, 78)
-                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(testPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
-        );
+        homePanel.setLayout(new java.awt.GridBagLayout());
+        homePanel.add(testPanelContainer2, new java.awt.GridBagConstraints());
 
         shopPanel.setBackground(new java.awt.Color(204, 0, 0));
 
@@ -238,7 +205,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(cartPanelLayout.createSequentialGroup()
                 .addGap(107, 107, 107)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(463, Short.MAX_VALUE))
+                .addContainerGap(622, Short.MAX_VALUE))
             .addGroup(cartPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,7 +223,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(answer)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(myCheck)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 228, Short.MAX_VALUE)
                 .addComponent(buySomething)
                 .addGap(112, 112, 112))
         );
@@ -269,7 +236,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(menuPanelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(shopPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(menuPanelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(homePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(homePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         menuPanelsLayout.setVerticalGroup(
             menuPanelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -277,7 +244,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(menuPanelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(shopPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(menuPanelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(homePanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(homePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         menu.setBackground(new java.awt.Color(204, 204, 204));
@@ -448,7 +415,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sideBarLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 199, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 255, Short.MAX_VALUE)
                 .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -585,7 +552,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel cartPanel;
     private javax.swing.JPanel homeMenuPoint;
     private javax.swing.JPanel homePanel;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -601,7 +567,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel shopPanel;
     private javax.swing.JPanel sideBar;
     private javax.swing.JTable table1;
-    private onlineshop.TestPanel testPanel1;
     private onlineshop.testPanelContainer testPanelContainer2;
     // End of variables declaration//GEN-END:variables
 

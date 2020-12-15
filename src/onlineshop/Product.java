@@ -92,9 +92,9 @@ public class Product {
         String response[] = {
             String.valueOf(id),
             name,
-            String.valueOf(price) + "Ft",
+            String.valueOf(price),
             category,
-            String.valueOf(available) + "db"
+            String.valueOf(available)
         };
         return response;
     }
