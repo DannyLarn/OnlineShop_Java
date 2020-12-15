@@ -61,10 +61,10 @@ public class TestPanel extends javax.swing.JPanel {
     }
     
     public void setLabelsByArray(String product[]) {
-        labelId.setText(product[0]);
+        labelId.setText(product[0] + ".");
         labelName.setText(product[1]);
         labelPrice.setText(product[2] + "Ft");
-        labelCategory.setText(product[3]);
+        labelCategory.setText("#" + product[3]);
         labelAvailable.setText(product[4] + "db");
         
         this.id = Integer.parseInt(product[0]);
@@ -77,10 +77,10 @@ public class TestPanel extends javax.swing.JPanel {
     }
     
     public void setLabelsByParameters(int id, String name, int price, String category, int available) {
-        labelId.setText(String.valueOf(id));
+        labelId.setText(String.valueOf(id) + ".");
         labelName.setText(name);
         labelPrice.setText(String.valueOf(price) + "Ft");
-        labelCategory.setText(category);
+        labelCategory.setText("#" + category);
         labelAvailable.setText(String.valueOf(available) + "db");
         
         this.id = id;

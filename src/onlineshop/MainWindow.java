@@ -1,25 +1,11 @@
 package onlineshop;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
 import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.Point;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import javax.swing.BoxLayout;
-import javax.swing.DefaultCellEditor;
-import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -37,65 +23,29 @@ public class MainWindow extends javax.swing.JFrame {
      * Creates new form MainWindow
      */
     
-    private final Storage testStorage;
-    private final Cart cart;
-    
-    
     public MainWindow() {
         initComponents();
         
-        testStorage = new Storage();
-        cart = new Cart(testStorage);
+//        testStorage = new Storage();
+//        cart = new Cart(testStorage);
         
-        testStorage.testList();
-        
-        
-//        DefaultListModel listModel = new DefaultListModel();
-        
-        List<String[]> asd = testStorage.searchByName("");
-        if (asd != null) {
-            asd.forEach((a) -> {
-                System.out.println(a[0] + " " + a[1] + " " + a[2] + " " + a[3] + " " + a[4]);
-//                listModel.addElement(a);
-//                testPanel1.setLabels(a);
-                testPanelContainer2.addRow(a);
-                
-            });
-        }
-        
-//        setTable();
-        
-        
-//        listModel.addElement(list);
-        
+//        testStorage.testList();
 
-        
+//        List<String[]> asd = testStorage.searchByName("");
+//        if (asd != null) {
+//            asd.forEach((a) -> {
+//                System.out.println(a[0] + " " + a[1] + " " + a[2] + " " + a[3] + " " + a[4]);
+//                testPanelContainer2.addRow(a);
+//            });
+//        }
+        testPanelContainer2.build();
         setMenu(homePanel);
     }
 
-    private void setTable() {
-//        DefaultTableModel model = (DefaultTableModel) table.getModel();
-//        
-//        model.setColumnCount(0);
-//        model.setRowCount(0);
-//        
-//        String identifiers[] = {"Id", "Name", "Price", "Category", "Available"};
-//        model.setColumnIdentifiers(identifiers);
-//        
-//        List<String[]> products = testStorage.getAllProducts();
-//        
-//        for (String prod[] : products) {
-//            model.addRow(prod);
-//        }
-//        
-//        table.getTableHeader().setReorderingAllowed(false);
-//        
-//        table.setEnabled(false);
-    }
     
     private void setMenu(JPanel panel) {
         homePanel.setVisible(homePanel.equals(panel));
-        shopPanel.setVisible(shopPanel.equals(panel));
+        whishlistPanel.setVisible(whishlistPanel.equals(panel));
         cartPanel.setVisible(cartPanel.equals(panel));
     }
     /**
@@ -108,8 +58,11 @@ public class MainWindow extends javax.swing.JFrame {
 
         menuPanels = new javax.swing.JPanel();
         homePanel = new javax.swing.JPanel();
-        testPanelContainer2 = new onlineshop.testPanelContainer();
-        shopPanel = new javax.swing.JPanel();
+        testPanelContainer2 = new onlineshop.StoragePanel();
+        searchField = new javax.swing.JTextField();
+        searchType = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        whishlistPanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         table1 = new javax.swing.JTable();
         cartPanel = new javax.swing.JPanel();
@@ -122,7 +75,7 @@ public class MainWindow extends javax.swing.JFrame {
         menu = new javax.swing.JPanel();
         homeMenuPoint = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        shopMenuPoint = new javax.swing.JPanel();
+        whishlistMenuPoint = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         cartMenuPoint = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -130,27 +83,56 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         homePanel.setBackground(new java.awt.Color(204, 255, 255));
+
+        searchField.setToolTipText("asd");
+        searchField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchFieldActionPerformed(evt);
+            }
+        });
+
+        searchType.setEditable(true);
+        searchType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Minden", "Nev", "Kategoria" }));
+        searchType.setFocusable(false);
+
+        jLabel5.setText("Keresés a következők szerint:");
 
         javax.swing.GroupLayout homePanelLayout = new javax.swing.GroupLayout(homePanel);
         homePanel.setLayout(homePanelLayout);
         homePanelLayout.setHorizontalGroup(
             homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(homePanelLayout.createSequentialGroup()
-                .addGap(82, 82, 82)
-                .addComponent(testPanelContainer2, javax.swing.GroupLayout.PREFERRED_SIZE, 693, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(searchType, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(139, 139, 139))
+            .addGroup(homePanelLayout.createSequentialGroup()
+                .addGap(79, 79, 79)
+                .addComponent(testPanelContainer2, javax.swing.GroupLayout.PREFERRED_SIZE, 692, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(68, Short.MAX_VALUE))
         );
         homePanelLayout.setVerticalGroup(
             homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(homePanelLayout.createSequentialGroup()
-                .addGap(133, 133, 133)
-                .addComponent(testPanelContainer2, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addGap(107, 107, 107)
+                .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(testPanelContainer2, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
+                .addContainerGap(106, Short.MAX_VALUE))
         );
 
-        shopPanel.setBackground(new java.awt.Color(204, 0, 0));
+        searchField.getAccessibleContext().setAccessibleName("");
+
+        whishlistPanel.setBackground(new java.awt.Color(204, 0, 0));
 
         table1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -167,18 +149,18 @@ public class MainWindow extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(table1);
 
-        javax.swing.GroupLayout shopPanelLayout = new javax.swing.GroupLayout(shopPanel);
-        shopPanel.setLayout(shopPanelLayout);
-        shopPanelLayout.setHorizontalGroup(
-            shopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(shopPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout whishlistPanelLayout = new javax.swing.GroupLayout(whishlistPanel);
+        whishlistPanel.setLayout(whishlistPanelLayout);
+        whishlistPanelLayout.setHorizontalGroup(
+            whishlistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(whishlistPanelLayout.createSequentialGroup()
                 .addGap(93, 93, 93)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(99, Short.MAX_VALUE))
         );
-        shopPanelLayout.setVerticalGroup(
-            shopPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(shopPanelLayout.createSequentialGroup()
+        whishlistPanelLayout.setVerticalGroup(
+            whishlistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(whishlistPanelLayout.createSequentialGroup()
                 .addGap(65, 65, 65)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(102, Short.MAX_VALUE))
@@ -239,7 +221,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(answer)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(myCheck)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 228, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(buySomething)
                 .addGap(112, 112, 112))
         );
@@ -250,7 +232,7 @@ public class MainWindow extends javax.swing.JFrame {
             menuPanelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(cartPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(menuPanelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(shopPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(whishlistPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(menuPanelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(homePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -258,7 +240,7 @@ public class MainWindow extends javax.swing.JFrame {
             menuPanelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(cartPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(menuPanelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(shopPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(whishlistPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(menuPanelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(homePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -299,35 +281,35 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        shopMenuPoint.setBackground(new java.awt.Color(255, 255, 255));
-        shopMenuPoint.addMouseListener(new java.awt.event.MouseAdapter() {
+        whishlistMenuPoint.setBackground(new java.awt.Color(255, 255, 255));
+        whishlistMenuPoint.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                shopMenuPointMouseClicked(evt);
+                whishlistMenuPointMouseClicked(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                shopMenuPointMouseExited(evt);
+                whishlistMenuPointMouseExited(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                shopMenuPointMouseEntered(evt);
+                whishlistMenuPointMouseEntered(evt);
             }
         });
 
         jLabel1.setFont(new java.awt.Font("Monaco", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Shop");
+        jLabel1.setText("Whislist");
 
-        javax.swing.GroupLayout shopMenuPointLayout = new javax.swing.GroupLayout(shopMenuPoint);
-        shopMenuPoint.setLayout(shopMenuPointLayout);
-        shopMenuPointLayout.setHorizontalGroup(
-            shopMenuPointLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, shopMenuPointLayout.createSequentialGroup()
+        javax.swing.GroupLayout whishlistMenuPointLayout = new javax.swing.GroupLayout(whishlistMenuPoint);
+        whishlistMenuPoint.setLayout(whishlistMenuPointLayout);
+        whishlistMenuPointLayout.setHorizontalGroup(
+            whishlistMenuPointLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, whishlistMenuPointLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        shopMenuPointLayout.setVerticalGroup(
-            shopMenuPointLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(shopMenuPointLayout.createSequentialGroup()
+        whishlistMenuPointLayout.setVerticalGroup(
+            whishlistMenuPointLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(whishlistMenuPointLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
                 .addContainerGap())
@@ -374,7 +356,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(menuLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(shopMenuPoint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(whishlistMenuPoint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cartMenuPoint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(homeMenuPoint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -385,7 +367,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(homeMenuPoint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(shopMenuPoint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(whishlistMenuPoint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cartMenuPoint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -396,7 +378,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Monaco", 0, 24)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("nem");
+        jLabel4.setText("Laci hulye BT");
 
         javax.swing.GroupLayout logoLayout = new javax.swing.GroupLayout(logo);
         logo.setLayout(logoLayout);
@@ -487,17 +469,17 @@ public class MainWindow extends javax.swing.JFrame {
         setCursor(Cursor.HAND_CURSOR);
     }//GEN-LAST:event_homeMenuPointMouseEntered
 
-    private void shopMenuPointMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_shopMenuPointMouseClicked
-        setMenu(shopPanel);
-    }//GEN-LAST:event_shopMenuPointMouseClicked
+    private void whishlistMenuPointMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_whishlistMenuPointMouseClicked
+        setMenu(whishlistPanel);
+    }//GEN-LAST:event_whishlistMenuPointMouseClicked
 
-    private void shopMenuPointMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_shopMenuPointMouseExited
+    private void whishlistMenuPointMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_whishlistMenuPointMouseExited
         setCursor(Cursor.DEFAULT_CURSOR);
-    }//GEN-LAST:event_shopMenuPointMouseExited
+    }//GEN-LAST:event_whishlistMenuPointMouseExited
 
-    private void shopMenuPointMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_shopMenuPointMouseEntered
+    private void whishlistMenuPointMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_whishlistMenuPointMouseEntered
         setCursor(Cursor.HAND_CURSOR);
-    }//GEN-LAST:event_shopMenuPointMouseEntered
+    }//GEN-LAST:event_whishlistMenuPointMouseEntered
 
     private void cartMenuPointMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cartMenuPointMouseClicked
         setMenu(cartPanel);
@@ -512,19 +494,24 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_cartMenuPointMouseEntered
 
     private void buySomethingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buySomethingActionPerformed
-        // TODO add your handling code here:
-        try {
-            cart.add(3, 6);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            JOptionPane optionPane = new JOptionPane(e.getMessage(), JOptionPane.ERROR_MESSAGE);
-            JDialog dialog = optionPane.createDialog("Mennyiseg hiba!");
-            dialog.setLocationByPlatform(true);
-            dialog.setLocationRelativeTo(this);
-            dialog.setAlwaysOnTop(true); // to show top of all other application
-            dialog.setVisible(true); // to visible the dialog
-        }
+        
+//        try {
+//            cart.add(3, 6);
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//            
+//            JOptionPane optionPane = new JOptionPane(e.getMessage(), JOptionPane.ERROR_MESSAGE);
+//            JDialog dialog = optionPane.createDialog("Mennyiseg hiba!");
+//            dialog.setLocationByPlatform(true);
+//            dialog.setLocationRelativeTo(this);
+//            dialog.setAlwaysOnTop(true); // to show top of all other application
+//            dialog.setVisible(true); // to visible the dialog
+//        }
     }//GEN-LAST:event_buySomethingActionPerformed
+
+    private void searchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFieldActionPerformed
+        
+    }//GEN-LAST:event_searchFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -572,6 +559,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JList<String> list;
@@ -579,11 +567,13 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel menu;
     private javax.swing.JPanel menuPanels;
     private javax.swing.JCheckBox myCheck;
-    private javax.swing.JPanel shopMenuPoint;
-    private javax.swing.JPanel shopPanel;
+    private javax.swing.JTextField searchField;
+    private javax.swing.JComboBox<String> searchType;
     private javax.swing.JPanel sideBar;
     private javax.swing.JTable table1;
-    private onlineshop.testPanelContainer testPanelContainer2;
+    private onlineshop.StoragePanel testPanelContainer2;
+    private javax.swing.JPanel whishlistMenuPoint;
+    private javax.swing.JPanel whishlistPanel;
     // End of variables declaration//GEN-END:variables
 
     private void JOptionPane(Object object, String message) {

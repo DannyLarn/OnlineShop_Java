@@ -1,0 +1,123 @@
+{
+    "storage": [
+        {
+            "id": 1,
+            "name": "alma",
+            "price": 100,
+            "category": "gyumolcs",
+            "available": 15
+        },
+        {
+            "id": 2,
+            "name": "korte",
+            "price": 120,
+            "category": "gyumolcs",
+            "available": 17
+        },
+        {
+            "id": 3,
+            "name": "szolo",
+            "price": 100,
+            "category": "gyumolcs",
+            "available": 15
+        },
+        {
+            "id": 4,
+            "name": "kenyer",
+            "price": 50,
+            "category": "pekaru",
+            "available": 10
+        },
+        {
+            "id": 5,
+            "name": "kifli",
+            "price": 70,
+            "category": "pekaru",
+            "available": 1
+        },
+        {
+            "id": 6,
+            "name": "nem kifli",
+            "price": 70,
+            "category": "pekaru",
+            "available": 1
+        },
+        {
+            "id": 7,
+            "name": "hifi",
+            "price": 70000,
+            "category": "elektronika",
+            "available": 1
+        },
+        {
+            "id": 8,
+            "name": "salata",
+            "price": 300,
+            "category": "zoldseg",
+            "available": 5
+        },
+        {
+            "id": 9,
+            "name": "szendvics",
+            "price": 200,
+            "category": "pekaru",
+            "available": 3
+        },
+        {
+            "id": 10,
+            "name": "bab",
+            "price": 70,
+            "category": "zoldseg",
+            "available": 3
+        },
+        {
+            "id": 11,
+            "name": "macbook",
+            "price": 700000,
+            "category": "elektronika",
+            "available": 3
+        },
+        {
+            "id": 12,
+            "name": "granatalma",
+            "price": 700,
+            "category": "gyumolcs",
+            "available": 10
+        },
+        {
+            "id": 13,
+            "name": "kukorica",
+            "price": 200,
+            "category": "zoldseg",
+            "available": 1
+        },
+        {
+            "id": 14,
+            "name": "borso",
+            "price": 170,
+            "category": "zoldseg",
+            "available": 17
+        },
+        {
+            "id": 15,
+            "name": "kokuszcukor",
+            "price": 700,
+            "category": "fuszer",
+            "available": 8
+        },
+        {
+            "id": 16,
+            "name": "curry",
+            "price": 70,
+            "category": "fuszer",
+            "available": 12
+        },
+        {
+            "id": 16,
+            "name": "curryadhaksdhkashdkashd",
+            "price": 70,
+            "category": "fuszer",
+            "available": 12
+        }
+    ]
+}
