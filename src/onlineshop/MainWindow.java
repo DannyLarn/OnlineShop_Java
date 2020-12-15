@@ -1,6 +1,10 @@
 package onlineshop;
 
 import java.awt.Cursor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.JList;
@@ -39,6 +43,7 @@ public class MainWindow extends javax.swing.JFrame {
 //            });
 //        }
         testPanelContainer2.build();
+//        testPanelContainer2.search("k");
         setMenu(homePanel);
     }
 
@@ -87,16 +92,27 @@ public class MainWindow extends javax.swing.JFrame {
 
         homePanel.setBackground(new java.awt.Color(204, 255, 255));
 
-        searchField.setToolTipText("asd");
+        searchField.setToolTipText(null);
         searchField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchFieldActionPerformed(evt);
             }
         });
+        searchField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                searchFieldKeyReleased(evt);
+            }
+        });
 
         searchType.setEditable(true);
-        searchType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Minden", "Nev", "Kategoria" }));
+        searchType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nev", "Kategoria" }));
+        searchType.setToolTipText(null);
         searchType.setFocusable(false);
+        searchType.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                searchTypeItemStateChanged(evt);
+            }
+        });
 
         jLabel5.setText("Keresés a következők szerint:");
 
@@ -105,29 +121,30 @@ public class MainWindow extends javax.swing.JFrame {
         homePanelLayout.setHorizontalGroup(
             homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(homePanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchType, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(139, 139, 139))
-            .addGroup(homePanelLayout.createSequentialGroup()
-                .addGap(79, 79, 79)
-                .addComponent(testPanelContainer2, javax.swing.GroupLayout.PREFERRED_SIZE, 692, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE)
+                .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, homePanelLayout.createSequentialGroup()
+                        .addComponent(testPanelContainer2, javax.swing.GroupLayout.PREFERRED_SIZE, 692, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(73, 73, 73))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, homePanelLayout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(searchType, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(139, 139, 139))))
         );
         homePanelLayout.setVerticalGroup(
             homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(homePanelLayout.createSequentialGroup()
-                .addGap(107, 107, 107)
+                .addGap(78, 78, 78)
+                .addComponent(testPanelContainer2, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(testPanelContainer2, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addContainerGap(135, Short.MAX_VALUE))
         );
 
         searchField.getAccessibleContext().setAccessibleName("");
@@ -513,6 +530,21 @@ public class MainWindow extends javax.swing.JFrame {
         
     }//GEN-LAST:event_searchFieldActionPerformed
 
+    private void searchFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchFieldKeyReleased
+        search();
+    }//GEN-LAST:event_searchFieldKeyReleased
+
+    private void searchTypeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_searchTypeItemStateChanged
+        search();
+    }//GEN-LAST:event_searchTypeItemStateChanged
+
+    private void search() {
+        if (searchType.getSelectedIndex() == 0)
+            testPanelContainer2.searchByName(searchField.getText());
+        else if (searchType.getSelectedIndex() == 1)
+            testPanelContainer2.searchByCategory(searchField.getText());
+    }
+    
     /**
      * @param args the command line arguments
      */

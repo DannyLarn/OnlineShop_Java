@@ -29,10 +29,12 @@ public class StoragePanel extends javax.swing.JPanel {
      */
     //
     private final List<onlineshop.ShopProductElement> testPanels;
+    private List<onlineshop.ShopProductElement> searchResult;
     private String filename = "./src/onlineshop/Files/storage.json";
     // constructor:
     public StoragePanel() {
         testPanels = new ArrayList();
+        searchResult = new ArrayList();
         initComponents();
         jScrollPane1.getVerticalScrollBar().setUnitIncrement(16);
         
@@ -59,7 +61,8 @@ public class StoragePanel extends javax.swing.JPanel {
                 String category = prod.get("category").toString();
                 int available = Integer.parseInt(prod.get("available").toString());
                 
-                addRow(id, name, price, category, available);
+                testPanels.add(new onlineshop.ShopProductElement());
+                addRow(id, name, price, category, available, testPanels);
             }
             
         } catch (Exception e) {
@@ -68,32 +71,35 @@ public class StoragePanel extends javax.swing.JPanel {
     }
     
     // add a new row to the table
-    public void addRow(int id, String name, int price, String category, int available) {
-        testPanels.add(new onlineshop.ShopProductElement());
+    public void addRow(int id, String name, int price, String category, int available, List<onlineshop.ShopProductElement> list) {
+        
         int height = 31;
         int minWidth = 622;
         int margin = 4;
-        getLastPanel().setLabels(id, name, price, category, available);
+        
+        onlineshop.ShopProductElement lastElement = list.get(list.size() - 1);
+        
+        lastElement.setLabels(id, name, price, category, available);
         
         // verifying how many elements the list has
-        if (testPanels.size() == 1) {
-            getLastPanel().setLocation(margin, 6);
+        if (list.size() == 1) {
+            lastElement.setLocation(margin, 6);
             container.setPreferredSize(new Dimension(this.getPreferredSize().width, container.getPreferredSize().height + 12));
         } else {
-            getLastPanel().setLocation(margin, getPenultPanel().getY() + height + margin);
+            lastElement.setLocation(margin, list.get(list.size() - 2).getY() + height + margin);
         }
         
         // treat horizontal scroll
         if (this.getSize().width < minWidth) {
             container.setPreferredSize(new Dimension(minWidth, container.getPreferredSize().height + height + margin));
             container.setSize(minWidth, container.getPreferredSize().height + height + margin);
-            getLastPanel().setSize(minWidth, height);
+            lastElement.setSize(minWidth, height);
         } else {
 //            jScrollPane1.setSize(new Dimension(this.getWidth(), this.getHeight()));
 //            jScrollPane1.setPreferredSize(new Dimension(this.getWidth(), this.getHeight()));
             container.setPreferredSize(new Dimension(jScrollPane1.getPreferredSize().width - 25, container.getPreferredSize().height + height + margin));
             container.setSize(this.getSize().width - 25, this.getSize().height + height + margin);
-            getLastPanel().setSize(this.getSize().width - 25, height);
+            lastElement.setSize(this.getSize().width - 25, height);
         }
         
         
@@ -101,24 +107,24 @@ public class StoragePanel extends javax.swing.JPanel {
         System.out.println("Asd: " + jScrollPane1.getWidth());
         System.out.println(container.getPreferredSize().width);
         System.out.println(container.getSize().width);
-        System.out.println(getLastPanel().getSize().width);
+        System.out.println(lastElement.getSize().width);
         
-        container.add(getLastPanel());
-        getLastPanel().setVisible(true);
+        container.add(lastElement);
+        lastElement.setVisible(true);
     }
 
     // get the last element of list
-    private onlineshop.ShopProductElement getLastPanel() {
-        return testPanels.get(testPanels.size() - 1);
-    }
+//    private onlineshop.ShopProductElement getLastPanel(List<onlineshop.ShopProductElement> list) {
+//        return testPanels.get(testPanels.size() - 1);
+//    }
     // get the penult element of list
-    private onlineshop.ShopProductElement getPenultPanel() {
-        if (testPanels.size() > 1) {
-            return testPanels.get(testPanels.size() - 2);
-        } else {
-            return testPanels.get(testPanels.size() - 1);
-        }
-    }
+//    private onlineshop.ShopProductElement getPenultPanel() {
+//        if (testPanels.size() > 1) {
+//            return testPanels.get(testPanels.size() - 2);
+//        } else {
+//            return testPanels.get(testPanels.size() - 1);
+//        }
+//    }
     
     public void throwMessage(Exception e, String errorTitle, int messageType) {
         JOptionPane optionPane = new JOptionPane(e.getMessage(), messageType);
@@ -127,6 +133,32 @@ public class StoragePanel extends javax.swing.JPanel {
         dialog.setLocationRelativeTo(this);
         dialog.setAlwaysOnTop(true); // to show top of all other application
         dialog.setVisible(true); // to visible the dialog
+    }
+    
+    private void search(String search, String type) {
+        searchResult.removeAll(searchResult);
+        container.removeAll();
+        container.repaint();
+        container.setPreferredSize(new Dimension(0, 0));
+        
+        for (onlineshop.ShopProductElement panel : testPanels) {
+            onlineshop.TestPanel prod = panel.getProductPanel();
+            if ((type.equals("name") && prod.searchByName(search))) {
+                searchResult.add(panel);
+                addRow(prod.getId(), prod.getName(), prod.getPrice(), prod.getCategory(), prod.getAvailable(), searchResult);
+            } else if (type.equals("category") && prod.searchByCategory(search)) {
+                searchResult.add(panel);
+                addRow(prod.getId(), prod.getName(), prod.getPrice(), prod.getCategory(), prod.getAvailable(), searchResult);
+            }
+        }
+    }
+    
+    public void searchByName(String search) {
+        search(search, "name");
+    }
+    
+    public void searchByCategory(String search) {
+        search(search, "category");
     }
     
     /**
