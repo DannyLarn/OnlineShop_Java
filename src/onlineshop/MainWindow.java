@@ -59,13 +59,14 @@ public class MainWindow extends javax.swing.JFrame {
 //                listModel.addElement(a);
 //                testPanel1.setLabels(a);
                 testPanelContainer2.addRow(a);
+                
             });
         }
         
 //        setTable();
         
         
-//        listModel.addElement(asd);
+//        listModel.addElement(list);
         
 
         
@@ -131,8 +132,23 @@ public class MainWindow extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         homePanel.setBackground(new java.awt.Color(204, 255, 255));
-        homePanel.setLayout(new java.awt.GridBagLayout());
-        homePanel.add(testPanelContainer2, new java.awt.GridBagConstraints());
+
+        javax.swing.GroupLayout homePanelLayout = new javax.swing.GroupLayout(homePanel);
+        homePanel.setLayout(homePanelLayout);
+        homePanelLayout.setHorizontalGroup(
+            homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(homePanelLayout.createSequentialGroup()
+                .addGap(82, 82, 82)
+                .addComponent(testPanelContainer2, javax.swing.GroupLayout.PREFERRED_SIZE, 693, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(64, Short.MAX_VALUE))
+        );
+        homePanelLayout.setVerticalGroup(
+            homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(homePanelLayout.createSequentialGroup()
+                .addGap(133, 133, 133)
+                .addComponent(testPanelContainer2, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(112, Short.MAX_VALUE))
+        );
 
         shopPanel.setBackground(new java.awt.Color(204, 0, 0));
 

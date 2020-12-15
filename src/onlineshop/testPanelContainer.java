@@ -23,6 +23,7 @@ public class testPanelContainer extends javax.swing.JPanel {
     public testPanelContainer() {
         testPanels = new ArrayList();
         initComponents();
+        jScrollPane1.getVerticalScrollBar().setUnitIncrement(16);
 //        testPanel2.setVisible(false);
 //        String menu[] = {"123", "123", "asd", "jkl", "321"};
 //        
@@ -32,16 +33,24 @@ public class testPanelContainer extends javax.swing.JPanel {
     public void addRow(String rowLabels[]) {
         testPanels.add(new onlineshop.ShopProductElement());
         getLastPanel().setLabels(rowLabels);
+        
         if (testPanels.size() == 1) {
             getLastPanel().setLocation(0, 6);
-            container.setPreferredSize(new Dimension(container.getPreferredSize().width, container.getPreferredSize().height + 12));
+            container.setPreferredSize(new Dimension(this.getPreferredSize().width, container.getPreferredSize().height + 12));
         } else {
             getLastPanel().setLocation(0, getPenultPanel().getY() + 31);
         }
         
-        getLastPanel().setPreferredSize(new Dimension(jScrollPane1.getSize().width - 20, 31));
-        container.setPreferredSize(new Dimension(container.getPreferredSize().width, container.getPreferredSize().height + 31));
-//        getLastPanel().setSize(new Dimension());
+        
+        if (this.getSize().width < 622) {
+            container.setPreferredSize(new Dimension(622, container.getPreferredSize().height + 31));
+            container.setSize(622, container.getPreferredSize().height + 31);
+            getLastPanel().setSize(622, 31);
+        } else {
+            container.setPreferredSize(new Dimension(jScrollPane1.getPreferredSize().width - 20, container.getPreferredSize().height + 31));
+            container.setSize(jScrollPane1.getPreferredSize().width - 20, container.getPreferredSize().height + 31);
+            getLastPanel().setSize(this.getSize().width - 20, 31);
+        }
         
         container.add(getLastPanel());
         getLastPanel().setVisible(true);
@@ -76,9 +85,6 @@ public class testPanelContainer extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(622, 200));
         setSize(new java.awt.Dimension(622, 200));
 
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        jScrollPane1.setHorizontalScrollBar(null);
         jScrollPane1.setPreferredSize(new java.awt.Dimension(0, 0));
         jScrollPane1.setSize(new java.awt.Dimension(0, 0));
 

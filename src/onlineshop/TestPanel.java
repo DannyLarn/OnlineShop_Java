@@ -19,57 +19,27 @@ public class TestPanel extends javax.swing.JPanel {
     
     /**
      * Creates new form TestPanel
-     * @param id
-     * @param name
-     * @param price
-     * @param category
-     * @param available
      */
-    
-    public TestPanel(int id, String name, int price, String category, int available) {
-        initComponents();
-        
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.category = category;
-        this.available = available;
-        
-        setLabels(new String[]{
-            String.valueOf(id),
-            name,
-            String.valueOf(price),
-            category,
-            String.valueOf(available)
-        });
-    }
-    
-    public TestPanel(String product[]) {
-        initComponents();
-        
-        this.id = Integer.parseInt(product[0]);
-        this.name = product[1];
-        this.price = Integer.parseInt(product[2]);
-        this.category = product[3];
-        this.available = Integer.parseInt(product[4]);
-        
-        setLabels(new String[]{
-            String.valueOf(id),
-            name,
-            String.valueOf(price),
-            category,
-            String.valueOf(available)
-        });
-    }
     
     public TestPanel() {
         initComponents();
     }
-
+    
+    public TestPanel(int id, String name, int price, String category, int available) {
+        initComponents();
+        setLabelsByParameters(id, name, price, category, available);
+    }
+    
+    public TestPanel(String product[]) {
+        initComponents();
+        setLabelsByArray(product);
+    }
+    
     public int getId() {
         return id;
     }
     
+    @Override
     public String getName() {
         return name;
     }
@@ -90,14 +60,6 @@ public class TestPanel extends javax.swing.JPanel {
         this.available = available;
     }
     
-    private void setLabels(String labelTexts[]) {
-        labelId.setText(labelTexts[0]);
-        labelName.setText(labelTexts[1]);
-        labelPrice.setText(labelTexts[2] + "Ft");
-        labelCategory.setText(labelTexts[3]);
-        labelAvailable.setText(labelTexts[4] + "db");
-    }
-    
     public void setLabelsByArray(String product[]) {
         labelId.setText(product[0]);
         labelName.setText(product[1]);
@@ -110,6 +72,8 @@ public class TestPanel extends javax.swing.JPanel {
         this.price = Integer.parseInt(product[2]);
         this.category = product[3];
         this.available = Integer.parseInt(product[4]);
+        
+        setToolTipTexts();
     }
     
     public void setLabelsByParameters(int id, String name, int price, String category, int available) {
@@ -124,6 +88,16 @@ public class TestPanel extends javax.swing.JPanel {
         this.price = price;
         this.category = category;
         this.available = available;
+        
+        setToolTipTexts();
+    }
+    
+    private void setToolTipTexts() {
+        labelId.setToolTipText(labelId.getText());
+        labelName.setToolTipText(labelName.getText());
+        labelPrice.setToolTipText(labelPrice.getText());
+        labelCategory.setToolTipText(labelCategory.getText());
+        labelAvailable.setToolTipText(labelAvailable.getText());
     }
     
     /**
@@ -141,12 +115,18 @@ public class TestPanel extends javax.swing.JPanel {
         labelCategory = new javax.swing.JLabel();
         labelAvailable = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(400, 28));
         setMinimumSize(new java.awt.Dimension(400, 28));
         setPreferredSize(new java.awt.Dimension(400, 28));
         setSize(new java.awt.Dimension(400, 28));
 
         labelId.setText("jLabel2");
+        labelId.setMaximumSize(new java.awt.Dimension(80, 16));
+        labelId.setMinimumSize(new java.awt.Dimension(80, 16));
+        labelId.setPreferredSize(new java.awt.Dimension(80, 16));
+        labelId.setSize(new java.awt.Dimension(80, 16));
+        labelId.setToolTipText(labelId.getText());
 
         labelName.setText("jLabel3");
 
@@ -161,28 +141,29 @@ public class TestPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(labelId)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                .addComponent(labelName)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                .addComponent(labelPrice)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                .addComponent(labelCategory)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                .addComponent(labelAvailable)
-                .addGap(6, 6, 6))
+                .addContainerGap()
+                .addComponent(labelId, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labelName, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labelPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labelCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labelAvailable, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelId)
-                    .addComponent(labelName)
-                    .addComponent(labelPrice)
-                    .addComponent(labelCategory)
-                    .addComponent(labelAvailable))
+                    .addComponent(labelId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(labelName)
+                        .addComponent(labelPrice)
+                        .addComponent(labelCategory)
+                        .addComponent(labelAvailable)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
