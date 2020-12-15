@@ -32,14 +32,16 @@ public class Cart {
         if (added != null) {
             Product foundInCart = find(id);
             
-            if ((quantity > added.getAvailable() && added.getAvailable() != 0) ||
-                    (foundInCart != null && quantity + foundInCart.getAvailable() > added.getAvailable())) {
+            if ((quantity > added.getAvailable() && added.getAvailable() != 0)) {
                 throw new Exception("A megadott mennyiseg nem elerheto!");
             } else if (added.getAvailable() == 0) {
                 throw new Exception("A kivalasztott termek jelenleg nem elerheto!");
             } else if (foundInCart != null) {
                 foundInCart.setAvailable(foundInCart.getAvailable() + quantity);
                 System.out.println(foundInCart.getAvailable());
+                storage.testList();
+            } else if (foundInCart != null && quantity + foundInCart.getAvailable() > added.getAvailable()) {
+                
             } else {
                 cartElements.add(new Product(id, added.getName(), added.getPrice(), added.getCategory(), quantity));
             }
