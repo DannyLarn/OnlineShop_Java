@@ -31,12 +31,12 @@ public class Whishlist extends Table {
 //        displayedProducts = new ArrayList();
     }
 
-    public void addToCart(Product product) {
+    public void addToWhishlist(Product product) {
         allProducts.add(new WhishlistElement(this));
         addRow2(product.getId(), product.getName(), product.getPrice(), product.getCategory(), product.getAvailable(), allProducts);
     }
     
-    public void removeFromCart(WhishlistElement whishlistElement) {
+    public void removeFromWhishlist(WhishlistElement whishlistElement) {
         resetTable();
         allProducts.remove(whishlistElement);
         List<WhishlistElement> modifiedList = new ArrayList();
@@ -46,5 +46,14 @@ public class Whishlist extends Table {
             // new list needed
             addRow2(product.getId(), product.getName(), product.getPrice(), product.getCategory(), product.getAvailable(), modifiedList);
         }
+    }
+    
+    public boolean find(Product product) {
+        for (WhishlistElement element : allProducts) {
+            if (element.getProductPanel().find(product.getId()) != null) {
+                return true;
+            }
+        }
+        return false;
     }
 }

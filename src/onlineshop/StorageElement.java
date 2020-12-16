@@ -5,6 +5,9 @@
  */
 package onlineshop;
 
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author dnyyy
@@ -14,29 +17,28 @@ public class StorageElement extends javax.swing.JPanel {
     private Whishlist whishlist;
     /**
      * Creates new form ShopProductElement
+     * @param cart
+     * @param whishlist
      */
-//    public StorageElement() {
-//        initComponents();
-//    }
     public StorageElement(Cart cart, Whishlist whishlist) {
         initComponents();
         this.cart = cart;
         this.whishlist = whishlist;
     }
     public StorageElement(int id, String name, int price, String category, int available) {
-        testPanel1.setLabelsByParameters(id, name, price, category, available);
+        productPanel.setLabelsByParameters(id, name, price, category, available);
     }
 
     public void setLabels(String product[]) {
-        testPanel1.setLabelsByArray(product);
+        productPanel.setLabelsByArray(product);
     }
     
     public void setLabels(int id, String name, int price, String category, int available) {
-        testPanel1.setLabelsByParameters(id, name, price, category, available);
+        productPanel.setLabelsByParameters(id, name, price, category, available);
     }
     
     public onlineshop.Product getProductPanel() {
-        return testPanel1;
+        return productPanel;
     }
     
     /**
@@ -47,33 +49,33 @@ public class StorageElement extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        testPanel1 = new onlineshop.Product();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        productPanel = new onlineshop.Product();
+        cartButton = new javax.swing.JButton();
+        whishlistButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
         setMaximumSize(new java.awt.Dimension(32767, 31));
         setSize(new java.awt.Dimension(622, 31));
 
-        jButton1.setText("Kosarhoz");
-        jButton1.setFocusable(false);
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        cartButton.setText("Kosarhoz");
+        cartButton.setFocusable(false);
+        cartButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                cartButtonMouseClicked(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        cartButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                cartButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Whishlist");
-        jButton2.setFocusable(false);
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        whishlistButton.setText("Whishlist");
+        whishlistButton.setFocusable(false);
+        whishlistButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
+                whishlistButtonMouseClicked(evt);
             }
         });
 
@@ -83,11 +85,11 @@ public class StorageElement extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addComponent(testPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
+                .addComponent(productPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(whishlistButton, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5))
         );
         layout.setVerticalGroup(
@@ -95,31 +97,52 @@ public class StorageElement extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(1, 1, 1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(testPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(productPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cartButton)
+                    .addComponent(whishlistButton))
                 .addGap(1, 1, 1))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void cartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cartButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_cartButtonActionPerformed
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-//        System.out.println(testPanel1.getId());
-        cart.addToCart(testPanel1);
-    }//GEN-LAST:event_jButton1MouseClicked
+    private void cartButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cartButtonMouseClicked
+        try {
+            if (cart.quantityVerification(this.productPanel) || this.productPanel.getAvailable() == 0) {
+                throw new Exception("A kivalasztott termekbol nincs tobb.");
+            }
+            cart.addToCart(productPanel);
+        } catch (Exception e) {
+            throwError(e, "Keszlethiany", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_cartButtonMouseClicked
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        System.out.println(testPanel1.getId());
-        whishlist.addToCart(testPanel1);
-    }//GEN-LAST:event_jButton2MouseClicked
+    private void whishlistButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_whishlistButtonMouseClicked
+        try {
+            if (whishlist.find(this.getProductPanel())) {
+                throw new Exception("Ezt az elemet mar hozzaadta a listahoz!");
+            } 
+            whishlist.addToWhishlist(productPanel);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throwError(e, "Ismetlodesi hiba", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_whishlistButtonMouseClicked
 
+    private void throwError(Exception e, String errorTitle, int messageType) {
+        JOptionPane optionPane = new JOptionPane(e.getMessage(), messageType);
+        JDialog dialog = optionPane.createDialog(errorTitle);
+        dialog.setLocationByPlatform(true);
+        dialog.setLocationRelativeTo(this);
+        dialog.setAlwaysOnTop(true); // to show top of all other application
+        dialog.setVisible(true); // to visible the dialog
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private onlineshop.Product testPanel1;
+    private javax.swing.JButton cartButton;
+    private onlineshop.Product productPanel;
+    private javax.swing.JButton whishlistButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -52,10 +52,17 @@ public class MainWindow extends javax.swing.JFrame {
         searchType = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         testPanelContainer2 = new onlineshop.Storage();
+        jLabel7 = new javax.swing.JLabel();
         whishlistPanel = new javax.swing.JPanel();
         whishlist1 = new onlineshop.Whishlist();
+        jLabel6 = new javax.swing.JLabel();
+        whishlistTotal = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
         cartPanel = new javax.swing.JPanel();
         cart1 = new onlineshop.Cart();
+        jLabel8 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        cartTotal = new javax.swing.JLabel();
         sideBar = new javax.swing.JPanel();
         menu = new javax.swing.JPanel();
         homeMenuPoint = new javax.swing.JPanel();
@@ -96,74 +103,145 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel5.setText("Keresés a következők szerint:");
 
+        testPanelContainer2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                testPanelContainer2MouseClicked(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Lucida Grande", 0, 36)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("HOME");
+
         javax.swing.GroupLayout homePanelLayout = new javax.swing.GroupLayout(homePanel);
         homePanel.setLayout(homePanelLayout);
         homePanelLayout.setHorizontalGroup(
             homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(homePanelLayout.createSequentialGroup()
-                .addContainerGap(151, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchType, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(139, 139, 139))
-            .addGroup(homePanelLayout.createSequentialGroup()
-                .addGap(104, 104, 104)
-                .addComponent(testPanelContainer2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(homePanelLayout.createSequentialGroup()
+                        .addGap(104, 104, 104)
+                        .addComponent(testPanelContainer2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(homePanelLayout.createSequentialGroup()
+                        .addGap(306, 306, 306)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(homePanelLayout.createSequentialGroup()
+                        .addGap(145, 145, 145)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(searchType, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(113, Short.MAX_VALUE))
         );
         homePanelLayout.setVerticalGroup(
             homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(homePanelLayout.createSequentialGroup()
-                .addGap(123, 123, 123)
+                .addGap(49, 49, 49)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(testPanelContainer2, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66)
+                .addGap(37, 37, 37)
                 .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addContainerGap(135, Short.MAX_VALUE))
+                .addContainerGap(164, Short.MAX_VALUE))
         );
 
         searchField.getAccessibleContext().setAccessibleName("");
 
         whishlistPanel.setBackground(new java.awt.Color(204, 255, 204));
 
+        whishlist1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                whishlist1MouseClicked(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Lucida Grande", 0, 36)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("WHISHLIST");
+
+        whishlistTotal.setBackground(new java.awt.Color(255, 255, 255));
+        whishlistTotal.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        whishlistTotal.setText("Összeg: 0Ft");
+
         javax.swing.GroupLayout whishlistPanelLayout = new javax.swing.GroupLayout(whishlistPanel);
         whishlistPanel.setLayout(whishlistPanelLayout);
         whishlistPanelLayout.setHorizontalGroup(
             whishlistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(whishlistPanelLayout.createSequentialGroup()
-                .addGap(105, 105, 105)
-                .addComponent(whishlist1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(whishlistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(whishlistPanelLayout.createSequentialGroup()
+                        .addGap(292, 292, 292)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(whishlistPanelLayout.createSequentialGroup()
+                        .addGap(105, 105, 105)
+                        .addGroup(whishlistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(whishlistTotal)
+                            .addComponent(whishlist1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jSeparator2))))
                 .addContainerGap(112, Short.MAX_VALUE))
         );
         whishlistPanelLayout.setVerticalGroup(
             whishlistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(whishlistPanelLayout.createSequentialGroup()
-                .addGap(144, 144, 144)
+                .addGap(99, 99, 99)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(whishlist1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(198, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(whishlistTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(128, Short.MAX_VALUE))
         );
 
         cartPanel.setBackground(new java.awt.Color(0, 153, 0));
+
+        jLabel8.setFont(new java.awt.Font("Lucida Grande", 0, 36)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("CART");
+
+        cartTotal.setBackground(new java.awt.Color(255, 255, 255));
+        cartTotal.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        cartTotal.setText("Összeg: 0Ft");
+        cartTotal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cartTotalMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout cartPanelLayout = new javax.swing.GroupLayout(cartPanel);
         cartPanel.setLayout(cartPanelLayout);
         cartPanelLayout.setHorizontalGroup(
             cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cartPanelLayout.createSequentialGroup()
-                .addGap(105, 105, 105)
-                .addComponent(cart1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(cartPanelLayout.createSequentialGroup()
+                        .addGap(357, 357, 357)
+                        .addComponent(jLabel8))
+                    .addGroup(cartPanelLayout.createSequentialGroup()
+                        .addGap(105, 105, 105)
+                        .addGroup(cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cart1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jSeparator1)
+                            .addComponent(cartTotal))))
                 .addContainerGap(112, Short.MAX_VALUE))
         );
         cartPanelLayout.setVerticalGroup(
             cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cartPanelLayout.createSequentialGroup()
-                .addGap(158, 158, 158)
+                .addGap(130, 130, 130)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cart1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(192, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cartTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(115, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout menuPanelsLayout = new javax.swing.GroupLayout(menuPanels);
@@ -424,6 +502,19 @@ public class MainWindow extends javax.swing.JFrame {
         search();
     }//GEN-LAST:event_searchTypeItemStateChanged
 
+    private void whishlist1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_whishlist1MouseClicked
+//        whishlist1.getTotal();
+        
+    }//GEN-LAST:event_whishlist1MouseClicked
+
+    private void cartTotalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cartTotalMouseClicked
+        cartTotal.setText("Összeg: " + cart1.getTotal() + "Ft");
+    }//GEN-LAST:event_cartTotalMouseClicked
+
+    private void testPanelContainer2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_testPanelContainer2MouseClicked
+        cartTotal.setText("Összeg: " + cart1.getTotal() + "Ft");
+    }//GEN-LAST:event_testPanelContainer2MouseClicked
+
     private void search() {
         if (searchType.getSelectedIndex() == 0)
             testPanelContainer2.searchByName(searchField.getText());
@@ -470,6 +561,7 @@ public class MainWindow extends javax.swing.JFrame {
     private onlineshop.Cart cart1;
     private javax.swing.JPanel cartMenuPoint;
     private javax.swing.JPanel cartPanel;
+    private javax.swing.JLabel cartTotal;
     private javax.swing.JPanel homeMenuPoint;
     private javax.swing.JPanel homePanel;
     private javax.swing.JLabel jLabel1;
@@ -477,6 +569,11 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JPanel logo;
     private javax.swing.JPanel menu;
     private javax.swing.JPanel menuPanels;
@@ -487,5 +584,6 @@ public class MainWindow extends javax.swing.JFrame {
     private onlineshop.Whishlist whishlist1;
     private javax.swing.JPanel whishlistMenuPoint;
     private javax.swing.JPanel whishlistPanel;
+    private javax.swing.JLabel whishlistTotal;
     // End of variables declaration//GEN-END:variables
 }

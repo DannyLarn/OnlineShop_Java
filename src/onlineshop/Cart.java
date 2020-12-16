@@ -18,7 +18,6 @@ import java.util.List;
 public class Cart extends Table {
 
     private final List<CartElement> allProducts;
-//    private final List<onlineshop.CartElement> displayedProducts;
     
     /**
      * Creates new from StoragePanel
@@ -47,5 +46,20 @@ public class Cart extends Table {
             // new list needed
             addRow1(product.getId(), product.getName(), product.getPrice(), product.getCategory(), product.getAvailable(), modifiedList);
         }
+    }
+    
+    public boolean quantityVerification(Product product) {
+        int counter = 0;
+        counter = allProducts.stream().filter((element) -> (element.getProductPanel().find(product.getId()) != null)).map((_item) -> 1).reduce(counter, Integer::sum);
+        
+        return counter >= product.getAvailable();
+    }
+    
+    public int getTotal() {
+        int sum = 0;
+        for (CartElement element : allProducts) {
+            sum += element.getProductPanel().getPrice();
+        }
+        return sum;
     }
 }

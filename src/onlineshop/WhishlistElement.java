@@ -79,7 +79,7 @@ public class WhishlistElement extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
-        whishlist.removeFromCart(this);
+        whishlist.removeFromWhishlist(this);
     }//GEN-LAST:event_deleteMouseClicked
 
 
