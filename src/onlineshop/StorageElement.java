@@ -9,12 +9,12 @@ package onlineshop;
  *
  * @author dnyyy
  */
-public class ShopProductElement extends javax.swing.JPanel {
+public class StorageElement extends javax.swing.JPanel {
 
     /**
      * Creates new form ShopProductElement
      */
-    public ShopProductElement() {
+    public StorageElement() {
         initComponents();
     }
     
