@@ -27,13 +27,13 @@ public class Cart extends Table {
     // constructor:
     public Cart() {
         allProducts = new ArrayList();
-//        displayedProducts = new ArrayList();
     }
 
     public void addToCart(Product product) {
         // exception for too many selection 
         allProducts.add(new CartElement(this));
         addRow1(product.getId(), product.getName(), product.getPrice(), product.getCategory(), product.getAvailable(), allProducts);
+        main.setCartTotal();
     }
     
     public void removeFromCart(CartElement cartElement) {
@@ -46,6 +46,7 @@ public class Cart extends Table {
             // new list needed
             addRow1(product.getId(), product.getName(), product.getPrice(), product.getCategory(), product.getAvailable(), modifiedList);
         }
+        main.setCartTotal();
     }
     
     public boolean quantityVerification(Product product) {
@@ -55,11 +56,11 @@ public class Cart extends Table {
         return counter >= product.getAvailable();
     }
     
-    public int getTotal() {
+    public String getTotal() {
         int sum = 0;
         for (CartElement element : allProducts) {
             sum += element.getProductPanel().getPrice();
         }
-        return sum;
+        return String.valueOf(sum);
     }
 }

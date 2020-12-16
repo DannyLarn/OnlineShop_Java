@@ -126,7 +126,6 @@ public class StorageElement extends javax.swing.JPanel {
             } 
             whishlist.addToWhishlist(productPanel);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             throwError(e, "Ismetlodesi hiba", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_whishlistButtonMouseClicked

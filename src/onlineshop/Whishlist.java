@@ -34,6 +34,7 @@ public class Whishlist extends Table {
     public void addToWhishlist(Product product) {
         allProducts.add(new WhishlistElement(this));
         addRow2(product.getId(), product.getName(), product.getPrice(), product.getCategory(), product.getAvailable(), allProducts);
+        main.setWhishlistTotal();
     }
     
     public void removeFromWhishlist(WhishlistElement whishlistElement) {
@@ -46,6 +47,7 @@ public class Whishlist extends Table {
             // new list needed
             addRow2(product.getId(), product.getName(), product.getPrice(), product.getCategory(), product.getAvailable(), modifiedList);
         }
+        main.setWhishlistTotal();
     }
     
     public boolean find(Product product) {
@@ -55,5 +57,13 @@ public class Whishlist extends Table {
             }
         }
         return false;
+    }
+
+    public String getTotal() {
+        int sum = 0;
+        for (WhishlistElement element : allProducts) {
+            sum += element.getProductPanel().getPrice();
+        }
+        return String.valueOf(sum);
     }
 }

@@ -30,9 +30,19 @@ public class MainWindow extends javax.swing.JFrame {
     public MainWindow() {
         initComponents();
         testPanelContainer2.build(cart1, whishlist1);
+        cart1.setMain(this);
+        whishlist1.setMain(this);
         setMenu(homePanel);
     }
 
+    public void setCartTotal() {
+        cartTotal.setText("Összeg: " + cart1.getTotal() + "Ft");
+    }
+    
+    public void setWhishlistTotal() {
+        whishlistTotal.setText("Összeg: " + whishlist1.getTotal() + "Ft");
+    }
+    
     private void setMenu(JPanel panel) {
         homePanel.setVisible(homePanel.equals(panel));
         whishlistPanel.setVisible(whishlistPanel.equals(panel));
@@ -63,6 +73,7 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         cartTotal = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         sideBar = new javax.swing.JPanel();
         menu = new javax.swing.JPanel();
         homeMenuPoint = new javax.swing.JPanel();
@@ -213,6 +224,8 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("jButton1");
+
         javax.swing.GroupLayout cartPanelLayout = new javax.swing.GroupLayout(cartPanel);
         cartPanel.setLayout(cartPanelLayout);
         cartPanelLayout.setHorizontalGroup(
@@ -227,7 +240,10 @@ public class MainWindow extends javax.swing.JFrame {
                         .addGroup(cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(cart1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jSeparator1)
-                            .addComponent(cartTotal))))
+                            .addGroup(cartPanelLayout.createSequentialGroup()
+                                .addComponent(cartTotal)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton1)))))
                 .addContainerGap(112, Short.MAX_VALUE))
         );
         cartPanelLayout.setVerticalGroup(
@@ -240,8 +256,10 @@ public class MainWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cartTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addGroup(cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cartTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout menuPanelsLayout = new javax.swing.GroupLayout(menuPanels);
@@ -564,6 +582,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel cartTotal;
     private javax.swing.JPanel homeMenuPoint;
     private javax.swing.JPanel homePanel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

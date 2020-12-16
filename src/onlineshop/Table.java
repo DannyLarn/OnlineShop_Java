@@ -28,10 +28,16 @@ public class Table extends javax.swing.JPanel {
      */
     //
     
+    protected MainWindow main;
+    
     // constructor:
     public Table() {
         initComponents();
         Scroll.getVerticalScrollBar().setUnitIncrement(16);
+    }
+    
+    public void setMain(MainWindow main) {
+        this.main = main;
     }
     
     // add a new row to the table
