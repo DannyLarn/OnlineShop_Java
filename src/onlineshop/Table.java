@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -34,12 +35,12 @@ public class Table extends javax.swing.JPanel {
     }
     
     // add a new row to the table
-    public void addRow(int id, String name, int price, String category, int available, List<onlineshop.StorageElement> list) {
+    public void addRow(int id, String name, int price, String category, int available, List<StorageElement> list) {
         
         int height = 31;
         int minWidth = 622;
         int margin = 4;
-        onlineshop.StorageElement lastElement = list.get(list.size() - 1);
+        StorageElement lastElement = list.get(list.size() - 1);
         lastElement.setLabels(id, name, price, category, available);
         
         // verifying how many elements the list has
@@ -64,7 +65,38 @@ public class Table extends javax.swing.JPanel {
         productContainer.add(lastElement);
         lastElement.setVisible(true);
     }
-
+    
+        public void addRow1(int id, String name, int price, String category, int available, List<CartElement> list) {
+        
+        int height = 31;
+        int minWidth = 622;
+        int margin = 4;
+        CartElement lastElement = list.get(list.size() - 1);
+        lastElement.setLabels(id, name, price, category, available);
+        
+        // verifying how many elements the list has
+        if (list.size() == 1) {
+            lastElement.setLocation(margin, 6);
+            productContainer.setPreferredSize(new Dimension(this.getPreferredSize().width, productContainer.getPreferredSize().height + 12));
+        } else {
+            lastElement.setLocation(margin, list.get(list.size() - 2).getY() + height + margin);
+        }
+        
+        // treat horizontal scroll
+        if (this.getSize().width < minWidth) {
+            productContainer.setPreferredSize(new Dimension(minWidth, productContainer.getPreferredSize().height + height + margin));
+            productContainer.setSize(minWidth, productContainer.getPreferredSize().height + height + margin);
+            lastElement.setSize(minWidth, height);
+        } else {
+            productContainer.setPreferredSize(new Dimension(Scroll.getPreferredSize().width - 25, productContainer.getPreferredSize().height + height + margin));
+            productContainer.setSize(this.getSize().width - 25, this.getSize().height + height + margin);
+            lastElement.setSize(this.getSize().width - 25, height);
+        }
+        
+        productContainer.add(lastElement);
+        lastElement.setVisible(true);
+    }
+    
     public void throwMessage(Exception e, String errorTitle, int messageType) {
         JOptionPane optionPane = new JOptionPane(e.getMessage(), messageType);
         JDialog dialog = optionPane.createDialog(errorTitle);

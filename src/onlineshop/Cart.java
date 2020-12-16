@@ -1,82 +1,39 @@
-package onlineshop;
-
-import java.util.ArrayList;
-import java.util.List;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package onlineshop;
+
+import java.awt.Dimension;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  *
  * @author dnyyy
  */
-public class Cart {
-    // variables:
-    private final List<Product> cartElements;
-    private final Storage storage;
+public class Cart extends Table {
+
+    private final List<CartElement> allProducts;
+//    private final List<onlineshop.CartElement> displayedProducts;
     
-    // constructors:
-    public Cart(Storage storage) {
-        this.storage = storage;
-        cartElements = new ArrayList();
-    }
+    /**
+     * Creates new from StoragePanel
+     */
+    //
     
-    // void functions:
-    // add a Product by its id
-    public void add(int id, int quantity) throws Exception {
-        Product added = storage.getElementById(id);
-        
-        if (added != null) {
-            Product foundInCart = find(id);
-            
-            if ((quantity > added.getAvailable() && added.getAvailable() != 0)) {
-                throw new Exception("A megadott mennyiseg nem elerheto!");
-            } else if (added.getAvailable() == 0) {
-                throw new Exception("A kivalasztott termek jelenleg nem elerheto!");
-            } else if (foundInCart != null) {
-                foundInCart.setAvailable(foundInCart.getAvailable() + quantity);
-                System.out.println(foundInCart.getAvailable());
-                storage.testList();
-            } else if (foundInCart != null && quantity + foundInCart.getAvailable() > added.getAvailable()) {
-                
-            } else {
-                cartElements.add(new Product(id, added.getName(), added.getPrice(), added.getCategory(), quantity));
-            }
-        }
+    // constructor:
+    public Cart() {
+        allProducts = new ArrayList();
+//        displayedProducts = new ArrayList();
     }
-    // remove a Product from cart by its id
-    public void remove(int id) {
-        cartElements.remove(id);
+
+    public void addToCart(Product product) {
+        allProducts.add(new CartElement());
+        addRow1(product.getId(), product.getName(), product.getPrice(), product.getCategory(), product.getAvailable(), allProducts);
     }
-    // finalize the purchose it removes the given quantity of Product from Storage
-    public void purchase() throws Exception {
-        storage.purchase(cartElements);
-        cartElements.removeAll(cartElements);
-    }
-    
-    // var functions:
-    // return the List<String[]> of Products from cart
-    public List<String[]> getCartElements() {
-        List<String[]> response = new ArrayList();
-        for (Product prod : cartElements) {
-            response.add(prod.outputArray());
-        }
-        return response;
-    }
-    public Product find(int id) {
-        for (Product prod : cartElements)
-            if (prod.getId() == id)
-                return prod;
-        
-        return null;
-    }
-    // get the total price of cart
-    public int getTotal() {
-        int sum = 0;
-        sum = cartElements.stream().map((prod) -> prod.getPrice()).reduce(sum, Integer::sum);
-        return sum;
-    }
+                   
 }

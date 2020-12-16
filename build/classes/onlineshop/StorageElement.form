@@ -60,7 +60,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="onlineshop.TestPanel" name="testPanel1">
+    <Component class="onlineshop.Product" name="testPanel1">
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>

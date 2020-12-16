@@ -5,8 +5,13 @@
  */
 package onlineshop;
 
+import java.awt.Dimension;
 import java.io.FileReader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -15,18 +20,28 @@ import org.json.simple.parser.JSONParser;
  *
  * @author dnyyy
  */
-public class Storage {
-    // variables:
-    private final List<Product> products;
+public class Storage extends Table {
+
+    private final List<StorageElement> allProducts;
+    private final List<StorageElement> displayedProducts;
+    private Cart cart;
+    private final String filename = "./src/onlineshop/Files/storage.json";
     
-    // constructors:
+    /**
+     * Creates new from StoragePanel
+     */
+    //
+    // constructor:
     public Storage() {
-        products = new ArrayList();
-        readProductsFromFile("./src/onlineshop/Files/storage.json");
+        allProducts = new ArrayList();
+        displayedProducts = new ArrayList();
+    }
+
+    public void build(Cart cart) {
+        this.cart = cart;
+        readProductsFromFile(filename);
     }
     
-    // void functions:
-    // read all datas from storage.json and load into the list
     private void readProductsFromFile(String filepath) {
         JSONParser parser = new JSONParser();
         try {
@@ -36,89 +51,41 @@ public class Storage {
             
             while (it.hasNext()) {
                 JSONObject prod = (JSONObject) it.next();
-                
-//                "id": 1, "name": "alma", "price": 100, "category": "gyumolcs", "available": 15
+
                 int id = Integer.parseInt(prod.get("id").toString());
                 String name = prod.get("name").toString();
                 int price = Integer.parseInt(prod.get("price").toString());
                 String category = prod.get("category").toString();
                 int available = Integer.parseInt(prod.get("available").toString());
                 
-                upload(new Product(id, name, price, category, available));
+                allProducts.add(new StorageElement(cart));
+                addRow(id, name, price, category, available, allProducts);
             }
             
         } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    // upload the list of storage with a new product
-    private void upload(Product product) {
-        products.add(product);
-    }
-    // finalize the purchase it removes the give quantity of Products from Storage by the List of cart
-    public void purchase(List<Product> cartElements) throws Exception {
-        for (Product cartElement : cartElements) {
-            Product foundProd = getElementById(cartElement.getId());
-            if (foundProd != null) {
-                
-                if (foundProd.getAvailable() == 0) {
-                    cartElements.remove(foundProd.getId());
-                    throw new Exception("A(z) " + foundProd.getName() + " idokozben elfogyott.");
-                }
-                
-                foundProd.setAvailable(foundProd.getAvailable() - cartElement.getAvailable());
-            }
+            throwMessage(e, "Fajl beolvasas", JOptionPane.WARNING_MESSAGE);
         }
     }
     
-    // var functions:
-    // inspect every arguments of Products and return with a List<String[]>
-    public List<String[]> searchByEverything(String searchValue) {
-        return search("Everything", searchValue);
-    }
-    public List<String[]> searchByName(String searchValue) {
-        return search("Name", searchValue);
-    }
-    public List<String[]> searchByCategory(String searchValue) {
-        return search("Category", searchValue);
-    }
-    // return a Products of List<String[]> with the given search type
-    public List<String[]> search(String functionString, String searchValue) {
-        List<String[]> response = new ArrayList<>();
-        boolean hasError = false;
+    private void search(String search, String type) {
+        displayedProducts.removeAll(displayedProducts);
+        resetTable();
         
-        for (Product prod : products) {
-            String array[] = new String[5];
-            
-            switch (functionString) {
-                case "Everything": array = prod.searchByEverything(searchValue); break;
-                case "Category": array = prod.searchByCategory(searchValue); break;
-                case "Name": array = prod.searchByName(searchValue); break;
-                default: hasError = true; break;
-            }
-            
-            if (array != null) {
-                response.add(array);
+        for (onlineshop.StorageElement panel : allProducts) {
+            onlineshop.Product prod = panel.getProductPanel();
+            if ((type.equals("name") && prod.searchByName(search)) || (type.equals("category") && prod.searchByCategory(search))) {
+                displayedProducts.add(panel);
+                addRow(prod.getId(), prod.getName(), prod.getPrice(), prod.getCategory(), prod.getAvailable(), displayedProducts);
             }
         }
-        if (hasError) System.out.println("Storage search function error!");
-        
-        return response;
     }
-    // return a Product which id equals the functions parameter id
-    public Product getElementById(int id) {
-        for (Product prod : products)
-            if (prod.getId() == id)
-                return prod;
         
-        return null;
+    public void searchByName(String search) {
+        search(search, "name");
     }
     
-    // testing functions:
-    // list the name of all products to output
-    public void testList() {
-        products.forEach(prod -> {
-            prod.logAllData();
-        });
+    public void searchByCategory(String search) {
+        search(search, "category");
     }
+                   
 }

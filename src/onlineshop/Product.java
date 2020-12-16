@@ -1,106 +1,192 @@
-package onlineshop;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package onlineshop;
 
 /**
  *
  * @author dnyyy
  */
-public class Product {
-    // variables:
+public class Product extends javax.swing.JPanel {
+
     private int id;
     private String name;
     private int price;
     private String category;
     private int available;
-
-    // constructors:
+    
+    /**
+     * Creates new form TestPanel
+     */
+    
+    public Product() {
+        initComponents();
+    }
+    
     public Product(int id, String name, int price, String category, int available) {
+        initComponents();
+        setLabelsByParameters(id, name, price, category, available);
+    }
+    
+    public Product(String product[]) {
+        initComponents();
+        setLabelsByArray(product);
+    }
+    
+    public int getId() {
+        return id;
+    }
+    
+    @Override
+    public String getName() {
+        return name;
+    }
+    
+    public int getPrice() {
+        return price;
+    }
+    
+    public String getCategory() {
+        return category;
+    }
+    
+    public int getAvailable() {
+        return available;
+    }
+    
+    public void setAvailable(int available) {
+        this.available = available;
+    }
+    
+    public void setLabelsByArray(String product[]) {
+        labelId.setText(product[0] + ".");
+        labelName.setText(product[1]);
+        labelPrice.setText(product[2] + "Ft");
+        labelCategory.setText("#" + product[3]);
+        labelAvailable.setText(product[4] + "db");
+        
+        this.id = Integer.parseInt(product[0]);
+        this.name = product[1];
+        this.price = Integer.parseInt(product[2]);
+        this.category = product[3];
+        this.available = Integer.parseInt(product[4]);
+        
+        setToolTipTexts();
+    }
+    
+    public void setLabelsByParameters(int id, String name, int price, String category, int available) {
+        labelId.setText(String.valueOf(id) + ".");
+        labelName.setText(name);
+        labelPrice.setText(String.valueOf(price) + "Ft");
+        labelCategory.setText("#" + category);
+        labelAvailable.setText(String.valueOf(available) + "db");
+        
         this.id = id;
         this.name = name;
         this.price = price;
         this.category = category;
         this.available = available;
-    }
-    public Product() {
         
+        setToolTipTexts();
     }
     
-    // getters for variables:
-    public int getId() {
-        return id;
-    }
-    public String getName() {
-        return name;
-    }
-    public int getPrice() {
-        return price;
-    }
-    public String getCategory() {
-        return category;
-    }
-    public int getAvailable() {
-        return available;
+    private void setToolTipTexts() {
+        labelId.setToolTipText(labelId.getText());
+        labelName.setToolTipText(labelName.getText());
+        labelPrice.setToolTipText(labelPrice.getText());
+        labelCategory.setToolTipText(labelCategory.getText());
+        labelAvailable.setToolTipText(labelAvailable.getText());
     }
     
-    // setter functions:
-    public void setAvailable(int available) {
-        this.available = available;
+    public boolean searchByName(String search) {
+        return name.toLowerCase().contains(search.trim().toLowerCase());
     }
     
-    // void functions:
-    
-    // var functions:
-    public boolean equals(Product prod) {
-        return name.equals(prod.getName()) && price == prod.getPrice() &&
-                category.equals(prod.getCategory()) && available == prod.getAvailable();
-    }
-    // search for product by every data of it
-    public String[] searchByEverything(String searchText) {
-        return search(contains(id, searchText) || contains(name, searchText) || contains(price, searchText) ||
-                contains(category, searchText) || contains(available, searchText));
-    }
-    // search for a product by name
-    public String[] searchByName(String searchValue) {
-        return search(contains(name, searchValue));
-    }
-    // search for a product by category
-    public String[] searchByCategory(String searchValue) {
-        return search(contains(category, searchValue));
-    }
-    // return a String[] if the given condition is true
-    private String[] search(boolean condition) {
-        if (condition) {
-            String response[] = outputArray();
-            return response;
-        }
-        return null;
-    }
-    // return true if the given text is included in the given value (Integer)
-    private boolean contains(int value, String searchText) {
-        return String.valueOf(value).toLowerCase().contains(searchText.toLowerCase());
-    }
-    // return true if the given text is included in the given value (String)
-    private boolean contains(String value, String searchText) {
-        return value.toLowerCase().contains(searchText.toLowerCase());
-    }
-    public String[] outputArray() {
-        String response[] = {
-            String.valueOf(id),
-            name,
-            String.valueOf(price),
-            category,
-            String.valueOf(available)
-        };
-        return response;
+    public boolean searchByCategory(String search) {
+        return category.toLowerCase().contains(search.trim().toLowerCase());
     }
     
-    // test funcitons:
-    public void logAllData() {
-        System.out.printf("(%d) %s: %d, %s, %d\n", id, name, price, category, available);
+    public Product find(int index) {
+        return index == id ? this : null;
     }
+        
+    /**
+     * This method is called from within the constructor to initialize the form. WARNING: Do NOT modify this code. The
+     * content of this method is always regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jSeparator1 = new javax.swing.JSeparator();
+        labelId = new javax.swing.JLabel();
+        labelName = new javax.swing.JLabel();
+        labelPrice = new javax.swing.JLabel();
+        labelCategory = new javax.swing.JLabel();
+        labelAvailable = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(255, 255, 255));
+        setMaximumSize(new java.awt.Dimension(400, 28));
+        setMinimumSize(new java.awt.Dimension(400, 28));
+        setPreferredSize(new java.awt.Dimension(400, 28));
+        setSize(new java.awt.Dimension(400, 28));
+
+        labelId.setText("jLabel2");
+        labelId.setMaximumSize(new java.awt.Dimension(80, 16));
+        labelId.setMinimumSize(new java.awt.Dimension(80, 16));
+        labelId.setPreferredSize(new java.awt.Dimension(80, 16));
+        labelId.setSize(new java.awt.Dimension(80, 16));
+        labelId.setToolTipText(labelId.getText());
+
+        labelName.setText("jLabel3");
+
+        labelPrice.setText("jLabel4");
+
+        labelCategory.setText("jLabel5");
+
+        labelAvailable.setText("jLabel6");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelId, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labelName, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labelPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labelCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labelAvailable, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(labelName)
+                        .addComponent(labelPrice)
+                        .addComponent(labelCategory)
+                        .addComponent(labelAvailable)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+    }// </editor-fold>//GEN-END:initComponents
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel labelAvailable;
+    private javax.swing.JLabel labelCategory;
+    private javax.swing.JLabel labelId;
+    private javax.swing.JLabel labelName;
+    private javax.swing.JLabel labelPrice;
+    // End of variables declaration//GEN-END:variables
 }
