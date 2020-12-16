@@ -5,6 +5,7 @@
  */
 package onlineshop;
 
+import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -18,14 +19,24 @@ public class Purchase extends javax.swing.JFrame {
      * Creates new form Purchase
      */
     private MainWindow main;
+    private Storage storage;
+    private Cart cart;
     
     public Purchase() {
         initComponents();
         
     }
 
-    public void setMainWindow(MainWindow main) {
+    public void set(MainWindow main, Storage storage, Cart cart) {
         this.main = main;
+        this.storage = storage;
+        this.cart = cart;
+    }
+    
+    private void purchase() {
+        List<Product> chosenProducts = cart.getProducts();
+        storage.purchase(chosenProducts);
+        cart.removeAll();
     }
     
     /**
@@ -155,6 +166,7 @@ public class Purchase extends javax.swing.JFrame {
             if (nameField.getText().isEmpty() || validField.getText().isEmpty() || codeField.getText().isEmpty() || numberField.getText().isEmpty()) {
                 throw new Exception("Hianyosan adta meg az adatait!");
             }
+            purchase();
             this.setVisible(false);
             main.setVisible(true);
             this.dispose();

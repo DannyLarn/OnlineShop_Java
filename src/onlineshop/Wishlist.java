@@ -5,11 +5,17 @@
  */
 package onlineshop;
 
-import java.awt.Dimension;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 /**
  *
@@ -31,20 +37,19 @@ public class Wishlist extends Table {
 //        displayedProducts = new ArrayList();
     }
 
-    public void addToWhishlist(Product product) {
+    public void addToWishlist(Product product) {
         allProducts.add(new WishlistElement(this));
         addRow2(product.getId(), product.getName(), product.getPrice(), product.getCategory(), product.getAvailable(), allProducts);
         main.setWhishlistTotal();
     }
     
-    public void removeFromWhishlist(WishlistElement whishlistElement) {
+    public void removeFromWishlist(WishlistElement whishlistElement) {
         resetTable();
         allProducts.remove(whishlistElement);
         List<WishlistElement> modifiedList = new ArrayList();
         for (WishlistElement element : allProducts) {
             modifiedList.add(element);
             Product product = element.getProductPanel();
-            // new list needed
             addRow2(product.getId(), product.getName(), product.getPrice(), product.getCategory(), product.getAvailable(), modifiedList);
         }
         main.setWhishlistTotal();
@@ -65,5 +70,67 @@ public class Wishlist extends Table {
             sum += element.getProductPanel().getPrice();
         }
         return String.valueOf(sum);
+    }
+    
+    public void loadWishlist() {
+        
+        JSONParser parser = new JSONParser();
+        try {
+            JSONObject jsonObject = (JSONObject) parser.parse(new FileReader("./src/onlineshop/Files/wishlist.json"));
+            JSONArray storageList = (JSONArray) jsonObject.get("wishlist");
+            Iterator<JSONObject> it = storageList.iterator();
+            
+            while (it.hasNext()) {
+                JSONObject prod = (JSONObject) it.next();
+
+                int id = Integer.parseInt(prod.get("id").toString());
+                String name = prod.get("name").toString();
+                int price = Integer.parseInt(prod.get("price").toString());
+                String category = prod.get("category").toString();
+                int available = Integer.parseInt(prod.get("available").toString());
+                
+                addToWishlist(new Product(id, name, price, category, available));
+            }
+        } catch (Exception e) {
+            throwMessage(e, "Fajl beolvasasi hiba", JOptionPane.WARNING_MESSAGE);
+        }
+    
+    }
+    
+    public void saveWishlist() {
+        JSONArray wishlistList = new JSONArray();
+        
+        for (WishlistElement element : allProducts) {
+            Product product = element.getProductPanel();
+            JSONObject obj = new JSONObject();
+            
+            obj.put("id", product.getId());
+            obj.put("name", product.getName());
+            obj.put("price", product.getPrice());
+            obj.put("category", product.getCategory());
+            obj.put("available", product.getAvailable());
+            
+            wishlistList.add(obj);
+        }
+        JSONObject result = new JSONObject();
+        result.put("wishlist", wishlistList);
+        
+        FileWriter file;
+        try {
+            file = new FileWriter("./src/onlineshop/Files/wishlist.json");
+            file.write(result.toJSONString());
+            file.close();
+        } catch(IOException e) {
+            throwError(e, "Fajl kiiras problema", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void throwError(Exception e, String errorTitle, int messageType) {
+        JOptionPane optionPane = new JOptionPane(e.getMessage(), messageType);
+        JDialog dialog = optionPane.createDialog(errorTitle);
+        dialog.setLocationByPlatform(true);
+        dialog.setLocationRelativeTo(this);
+        dialog.setAlwaysOnTop(true); // to show top of all other application
+        dialog.setVisible(true); // to visible the dialog
     }
 }

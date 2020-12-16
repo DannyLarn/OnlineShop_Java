@@ -58,6 +58,7 @@ public class Product extends javax.swing.JPanel {
     
     public void setAvailable(int available) {
         this.available = available;
+        labelAvailable.setText(String.valueOf(available) + "db");
     }
     
     public void setLabelsByArray(String product[]) {

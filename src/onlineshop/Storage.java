@@ -7,9 +7,12 @@ package onlineshop;
 
 import java.awt.Dimension;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.json.simple.JSONArray;
@@ -69,6 +72,43 @@ public class Storage extends Table {
         }
     }
     
+    public void saveStorage() {
+        JSONArray wishlistList = new JSONArray();
+        
+        for (StorageElement element : allProducts) {
+            Product product = element.getProductPanel();
+            JSONObject obj = new JSONObject();
+            
+            obj.put("id", product.getId());
+            obj.put("name", product.getName());
+            obj.put("price", product.getPrice());
+            obj.put("category", product.getCategory());
+            obj.put("available", product.getAvailable());
+            
+            wishlistList.add(obj);
+        }
+        JSONObject result = new JSONObject();
+        result.put("storage", wishlistList);
+        
+        FileWriter file;
+        try {
+            file = new FileWriter("./src/onlineshop/Files/storage.json");
+            file.write(result.toJSONString());
+            file.close();
+        } catch(IOException e) {
+            throwError(e, "Fajl kiiras problema", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void throwError(Exception e, String errorTitle, int messageType) {
+        JOptionPane optionPane = new JOptionPane(e.getMessage(), messageType);
+        JDialog dialog = optionPane.createDialog(errorTitle);
+        dialog.setLocationByPlatform(true);
+        dialog.setLocationRelativeTo(this);
+        dialog.setAlwaysOnTop(true); // to show top of all other application
+        dialog.setVisible(true); // to visible the dialog
+    }
+    
     private void search(String search, String type) {
         displayedProducts.removeAll(displayedProducts);
         resetTable();
@@ -82,6 +122,59 @@ public class Storage extends Table {
         }
     }
         
+    private Product find(int id) {
+        for (StorageElement element : allProducts) {
+            if (element.getProductPanel().find(id) != null) {
+                return element.getProductPanel();
+            }
+        }
+        return null;
+    }
+
+    private void writeTotal(List<Product> products) {
+        JSONArray totalList = new JSONArray();
+        
+        for (Product product : products) {
+            JSONObject obj = new JSONObject();
+            
+            obj.put("id", product.getId());
+            obj.put("name", product.getName());
+            obj.put("price", product.getPrice());
+            obj.put("category", product.getCategory());
+            obj.put("available", product.getAvailable());
+            
+            totalList.add(obj);
+            
+            
+        }
+        JSONObject sum = new JSONObject();
+        sum.put("total", cart.getTotal());
+        totalList.add(sum);
+        
+        JSONObject result = new JSONObject();
+        result.put("total", totalList);
+        
+        FileWriter file;
+        try {
+            file = new FileWriter("./src/onlineshop/Files/total.json");
+            file.write(result.toJSONString());
+            file.close();
+        } catch(IOException e) {
+            throwError(e, "Fajl kiiras problema", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void purchase(List<Product> products) {
+        writeTotal(products);
+        for (Product product : products) {
+            Product prod = find(product.getId());
+            if (prod != null) {
+                prod.setAvailable(prod.getAvailable() - 1);
+            }
+        }
+        saveStorage();
+    }
+    
     public void searchByName(String search) {
         search(search, "name");
     }

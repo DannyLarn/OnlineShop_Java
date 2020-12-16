@@ -10,6 +10,9 @@
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
+  <Events>
+    <EventHandler event="windowClosing" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosing"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -81,7 +84,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
-                              <Component id="testPanelContainer2" min="-2" max="-2" attributes="0"/>
+                              <Component id="storage1" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="306" max="-2" attributes="0"/>
@@ -106,7 +109,7 @@
                       <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                       <Component id="jLabel7" min="-2" pref="62" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="testPanelContainer2" min="-2" pref="292" max="-2" attributes="0"/>
+                      <Component id="storage1" min="-2" pref="292" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="searchField" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -158,7 +161,7 @@
                 <Property name="text" type="java.lang.String" value="Keres&#xe9;s a k&#xf6;vetkez&#x151;k szerint:"/>
               </Properties>
             </Component>
-            <Component class="onlineshop.Storage" name="testPanelContainer2">
+            <Component class="onlineshop.Storage" name="storage1">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel7">
               <Properties>

@@ -79,7 +79,7 @@ public class WishlistElement extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
-        whishlist.removeFromWhishlist(this);
+        whishlist.removeFromWishlist(this);
     }//GEN-LAST:event_deleteMouseClicked
 
 

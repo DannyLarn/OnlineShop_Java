@@ -124,7 +124,7 @@ public class StorageElement extends javax.swing.JPanel {
             if (whishlist.find(this.getProductPanel())) {
                 throw new Exception("Ezt az elemet mar hozzaadta a listahoz!");
             } 
-            whishlist.addToWhishlist(productPanel);
+            whishlist.addToWishlist(productPanel);
         } catch (Exception e) {
             throwError(e, "Ismetlodesi hiba", JOptionPane.ERROR_MESSAGE);
         }

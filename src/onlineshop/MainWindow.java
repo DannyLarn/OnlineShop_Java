@@ -1,13 +1,7 @@
 package onlineshop;
 
 import java.awt.Cursor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.util.List;
 import javax.swing.JDialog;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -29,9 +23,11 @@ public class MainWindow extends javax.swing.JFrame {
     
     public MainWindow() {
         initComponents();
-        testPanelContainer2.build(cart1, wishlist1);
+        storage1.build(cart1, wishlist1);
         cart1.setMain(this);
+        cart1.loadCart();
         wishlist1.setMain(this);
+        wishlist1.loadWishlist();
         setMenu(homePanel);
     }
 
@@ -61,7 +57,7 @@ public class MainWindow extends javax.swing.JFrame {
         searchField = new javax.swing.JTextField();
         searchType = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
-        testPanelContainer2 = new onlineshop.Storage();
+        storage1 = new onlineshop.Storage();
         jLabel7 = new javax.swing.JLabel();
         wishlistPanel = new javax.swing.JPanel();
         wishlist1 = new onlineshop.Wishlist();
@@ -88,6 +84,11 @@ public class MainWindow extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JAVAsolt Bolt");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         homePanel.setBackground(new java.awt.Color(204, 255, 255));
 
@@ -122,7 +123,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(homePanelLayout.createSequentialGroup()
                         .addGap(104, 104, 104)
-                        .addComponent(testPanelContainer2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(storage1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(homePanelLayout.createSequentialGroup()
                         .addGap(306, 306, 306)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -141,7 +142,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGap(49, 49, 49)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(testPanelContainer2, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(storage1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -506,7 +507,7 @@ public class MainWindow extends javax.swing.JFrame {
                 throw new Exception("Nincs a kosarában semmi.");
             }
             Purchase purchaseFrame = new Purchase();
-            purchaseFrame.setMainWindow(this);
+            purchaseFrame.set(this, storage1, cart1);
             purchaseFrame.setSize(480, 530);
             purchaseFrame.setLocationRelativeTo(this);
             purchaseFrame.setVisible(true);
@@ -515,6 +516,13 @@ public class MainWindow extends javax.swing.JFrame {
             throwError(e, "Hiba", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_purchaseButtonMouseClicked
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        
+        // the magic happens here
+        cart1.saveCart();
+        wishlist1.saveWishlist();
+    }//GEN-LAST:event_formWindowClosing
 
     private void throwError(Exception e, String errorTitle, int messageType) {
         JOptionPane optionPane = new JOptionPane(e.getMessage(), messageType);
@@ -527,9 +535,9 @@ public class MainWindow extends javax.swing.JFrame {
     
     private void search() {
         if (searchType.getSelectedIndex() == 0)
-            testPanelContainer2.searchByName(searchField.getText());
+            storage1.searchByName(searchField.getText());
         else if (searchType.getSelectedIndex() == 1)
-            testPanelContainer2.searchByCategory(searchField.getText());
+            storage1.searchByCategory(searchField.getText());
     }
     
     /**
@@ -591,7 +599,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTextField searchField;
     private javax.swing.JComboBox<String> searchType;
     private javax.swing.JPanel sideBar;
-    private onlineshop.Storage testPanelContainer2;
+    private onlineshop.Storage storage1;
     private onlineshop.Wishlist wishlist1;
     private javax.swing.JPanel wishlistMenuPoint;
     private javax.swing.JPanel wishlistPanel;
