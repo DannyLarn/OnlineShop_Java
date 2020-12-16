@@ -29,7 +29,7 @@ public class MainWindow extends javax.swing.JFrame {
     
     public MainWindow() {
         initComponents();
-        testPanelContainer2.build(cart1);
+        testPanelContainer2.build(cart1, whishlist1);
         setMenu(homePanel);
     }
 
@@ -53,14 +53,9 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         testPanelContainer2 = new onlineshop.Storage();
         whishlistPanel = new javax.swing.JPanel();
-        cart1 = new onlineshop.Cart();
-        jLabel6 = new javax.swing.JLabel();
+        whishlist1 = new onlineshop.Whishlist();
         cartPanel = new javax.swing.JPanel();
-        answer = new javax.swing.JLabel();
-        myCheck = new javax.swing.JCheckBox();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        list = new javax.swing.JList<>();
-        buySomething = new javax.swing.JButton();
+        cart1 = new onlineshop.Cart();
         sideBar = new javax.swing.JPanel();
         menu = new javax.swing.JPanel();
         homeMenuPoint = new javax.swing.JPanel();
@@ -135,91 +130,40 @@ public class MainWindow extends javax.swing.JFrame {
 
         whishlistPanel.setBackground(new java.awt.Color(204, 255, 204));
 
-        jLabel6.setFont(new java.awt.Font("Lucida Grande", 0, 36)); // NOI18N
-        jLabel6.setText("EZ A KOSARAM BAZDMEG");
-
         javax.swing.GroupLayout whishlistPanelLayout = new javax.swing.GroupLayout(whishlistPanel);
         whishlistPanel.setLayout(whishlistPanelLayout);
         whishlistPanelLayout.setHorizontalGroup(
             whishlistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(whishlistPanelLayout.createSequentialGroup()
-                .addContainerGap(115, Short.MAX_VALUE)
-                .addGroup(whishlistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, whishlistPanelLayout.createSequentialGroup()
-                        .addComponent(cart1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(102, 102, 102))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, whishlistPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(188, 188, 188))))
+                .addGap(105, 105, 105)
+                .addComponent(whishlist1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(112, Short.MAX_VALUE))
         );
         whishlistPanelLayout.setVerticalGroup(
             whishlistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(whishlistPanelLayout.createSequentialGroup()
-                .addGap(97, 97, 97)
-                .addComponent(jLabel6)
-                .addGap(43, 43, 43)
-                .addComponent(cart1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(160, Short.MAX_VALUE))
+                .addGap(144, 144, 144)
+                .addComponent(whishlist1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(198, Short.MAX_VALUE))
         );
 
         cartPanel.setBackground(new java.awt.Color(0, 153, 0));
-
-        answer.setText("Ha ez nem mukodik buzi vagy");
-
-        myCheck.setText("jCheckBox1");
-        myCheck.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                myCheckMouseClicked(evt);
-            }
-        });
-
-        list.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        list.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                listMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(list);
-
-        buySomething.setText("vegyunk valamit");
-        buySomething.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buySomethingActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout cartPanelLayout = new javax.swing.GroupLayout(cartPanel);
         cartPanel.setLayout(cartPanelLayout);
         cartPanelLayout.setHorizontalGroup(
             cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cartPanelLayout.createSequentialGroup()
-                .addGap(107, 107, 107)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(622, Short.MAX_VALUE))
-            .addGroup(cartPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buySomething)
-                    .addComponent(myCheck)
-                    .addComponent(answer))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(105, 105, 105)
+                .addComponent(cart1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(112, Short.MAX_VALUE))
         );
         cartPanelLayout.setVerticalGroup(
             cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cartPanelLayout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(answer)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(myCheck)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(buySomething)
-                .addGap(112, 112, 112))
+                .addGap(158, 158, 158)
+                .addComponent(cart1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(192, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout menuPanelsLayout = new javax.swing.GroupLayout(menuPanels);
@@ -372,9 +316,9 @@ public class MainWindow extends javax.swing.JFrame {
         logo.setBackground(new java.awt.Color(255, 255, 204));
         logo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        jLabel4.setFont(new java.awt.Font("Monaco", 0, 24)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Monaco", 0, 18)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Laci hulye BT");
+        jLabel4.setText("JAVAslom hogy mukodj");
 
         javax.swing.GroupLayout logoLayout = new javax.swing.GroupLayout(logo);
         logo.setLayout(logoLayout);
@@ -432,23 +376,6 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    private void myCheckMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_myCheckMouseClicked
-        System.out.println(myCheck.isSelected());
-    }//GEN-LAST:event_myCheckMouseClicked
-
-    private void listMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listMouseClicked
-        JList theList = (JList) evt.getSource();
-        if (evt.getClickCount() == 1) {
-            
-            int index = theList.locationToIndex(evt.getPoint());
-            if (index >= 0) {
-                Object o = theList.getModel().getElementAt(index);
-            }
-        } else if (evt.getClickCount() == 2) {
-            
-        }
-    }//GEN-LAST:event_listMouseClicked
-
     private void homeMenuPointMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeMenuPointMouseClicked
         setMenu(homePanel);
     }//GEN-LAST:event_homeMenuPointMouseClicked
@@ -484,22 +411,6 @@ public class MainWindow extends javax.swing.JFrame {
     private void cartMenuPointMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cartMenuPointMouseEntered
         setCursor(Cursor.HAND_CURSOR);
     }//GEN-LAST:event_cartMenuPointMouseEntered
-
-    private void buySomethingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buySomethingActionPerformed
-        
-//        try {
-//            cart.add(3, 6);
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//            
-//            JOptionPane optionPane = new JOptionPane(e.getMessage(), JOptionPane.ERROR_MESSAGE);
-//            JDialog dialog = optionPane.createDialog("Mennyiseg hiba!");
-//            dialog.setLocationByPlatform(true);
-//            dialog.setLocationRelativeTo(this);
-//            dialog.setAlwaysOnTop(true); // to show top of all other application
-//            dialog.setVisible(true); // to visible the dialog
-//        }
-    }//GEN-LAST:event_buySomethingActionPerformed
 
     private void searchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFieldActionPerformed
         
@@ -556,8 +467,6 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel answer;
-    private javax.swing.JButton buySomething;
     private onlineshop.Cart cart1;
     private javax.swing.JPanel cartMenuPoint;
     private javax.swing.JPanel cartPanel;
@@ -568,17 +477,14 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JList<String> list;
     private javax.swing.JPanel logo;
     private javax.swing.JPanel menu;
     private javax.swing.JPanel menuPanels;
-    private javax.swing.JCheckBox myCheck;
     private javax.swing.JTextField searchField;
     private javax.swing.JComboBox<String> searchType;
     private javax.swing.JPanel sideBar;
     private onlineshop.Storage testPanelContainer2;
+    private onlineshop.Whishlist whishlist1;
     private javax.swing.JPanel whishlistMenuPoint;
     private javax.swing.JPanel whishlistPanel;
     // End of variables declaration//GEN-END:variables

@@ -25,6 +25,7 @@ public class Storage extends Table {
     private final List<StorageElement> allProducts;
     private final List<StorageElement> displayedProducts;
     private Cart cart;
+    private Whishlist whishlist;
     private final String filename = "./src/onlineshop/Files/storage.json";
     
     /**
@@ -37,8 +38,9 @@ public class Storage extends Table {
         displayedProducts = new ArrayList();
     }
 
-    public void build(Cart cart) {
+    public void build(Cart cart, Whishlist whishlist) {
         this.cart = cart;
+        this.whishlist = whishlist;
         readProductsFromFile(filename);
     }
     
@@ -58,7 +60,7 @@ public class Storage extends Table {
                 String category = prod.get("category").toString();
                 int available = Integer.parseInt(prod.get("available").toString());
                 
-                allProducts.add(new StorageElement(cart));
+                allProducts.add(new StorageElement(cart, whishlist));
                 addRow(id, name, price, category, available, allProducts);
             }
             
@@ -71,8 +73,8 @@ public class Storage extends Table {
         displayedProducts.removeAll(displayedProducts);
         resetTable();
         
-        for (onlineshop.StorageElement panel : allProducts) {
-            onlineshop.Product prod = panel.getProductPanel();
+        for (StorageElement panel : allProducts) {
+            Product prod = panel.getProductPanel();
             if ((type.equals("name") && prod.searchByName(search)) || (type.equals("category") && prod.searchByCategory(search))) {
                 displayedProducts.add(panel);
                 addRow(prod.getId(), prod.getName(), prod.getPrice(), prod.getCategory(), prod.getAvailable(), displayedProducts);

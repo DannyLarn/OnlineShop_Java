@@ -10,12 +10,14 @@ package onlineshop;
  * @author dnyyy
  */
 public class CartElement extends javax.swing.JPanel {
-
+    private final Cart cart;
     /**
      * Creates new form ShopProductElement
+     * @param cart
      */
-    public CartElement() {
+    public CartElement(Cart cart) {
         initComponents();
+        this.cart = cart;
     }
     
     public void setLabels(String product[]) {
@@ -39,23 +41,18 @@ public class CartElement extends javax.swing.JPanel {
     private void initComponents() {
 
         testPanel1 = new onlineshop.Product();
-        jButton1 = new javax.swing.JButton();
+        delete = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(new javax.swing.border.LineBorder(new java.awt.Color(102, 102, 102), 1, true));
         setMaximumSize(new java.awt.Dimension(32767, 31));
         setSize(new java.awt.Dimension(622, 31));
 
-        jButton1.setText("Eltavolítás");
-        jButton1.setFocusable(false);
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        delete.setText("Eltavolítás");
+        delete.setFocusable(false);
+        delete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
-            }
-        });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                deleteMouseClicked(evt);
             }
         });
 
@@ -67,7 +64,7 @@ public class CartElement extends javax.swing.JPanel {
                 .addGap(5, 5, 5)
                 .addComponent(testPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(delete, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6))
         );
         layout.setVerticalGroup(
@@ -76,22 +73,18 @@ public class CartElement extends javax.swing.JPanel {
                 .addGap(1, 1, 1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(testPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(delete))
                 .addGap(1, 1, 1))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        System.out.println(testPanel1.getId());
-    }//GEN-LAST:event_jButton1MouseClicked
+    private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
+        cart.removeFromCart(this);
+    }//GEN-LAST:event_deleteMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton delete;
     private onlineshop.Product testPanel1;
     // End of variables declaration//GEN-END:variables
 }

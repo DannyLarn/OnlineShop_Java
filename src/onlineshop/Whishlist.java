@@ -15,9 +15,9 @@ import java.util.List;
  *
  * @author dnyyy
  */
-public class Cart extends Table {
+public class Whishlist extends Table {
 
-    private final List<CartElement> allProducts;
+    private final List<WhishlistElement> allProducts;
 //    private final List<onlineshop.CartElement> displayedProducts;
     
     /**
@@ -26,26 +26,25 @@ public class Cart extends Table {
     //
     
     // constructor:
-    public Cart() {
+    public Whishlist() {
         allProducts = new ArrayList();
 //        displayedProducts = new ArrayList();
     }
 
     public void addToCart(Product product) {
-        // exception for too many selection 
-        allProducts.add(new CartElement(this));
-        addRow1(product.getId(), product.getName(), product.getPrice(), product.getCategory(), product.getAvailable(), allProducts);
+        allProducts.add(new WhishlistElement(this));
+        addRow2(product.getId(), product.getName(), product.getPrice(), product.getCategory(), product.getAvailable(), allProducts);
     }
     
-    public void removeFromCart(CartElement cartElement) {
+    public void removeFromCart(WhishlistElement whishlistElement) {
         resetTable();
-        allProducts.remove(cartElement);
-        List<CartElement> modifiedList = new ArrayList();
-        for (CartElement element : allProducts) {
+        allProducts.remove(whishlistElement);
+        List<WhishlistElement> modifiedList = new ArrayList();
+        for (WhishlistElement element : allProducts) {
             modifiedList.add(element);
             Product product = element.getProductPanel();
             // new list needed
-            addRow1(product.getId(), product.getName(), product.getPrice(), product.getCategory(), product.getAvailable(), modifiedList);
+            addRow2(product.getId(), product.getName(), product.getPrice(), product.getCategory(), product.getAvailable(), modifiedList);
         }
     }
 }

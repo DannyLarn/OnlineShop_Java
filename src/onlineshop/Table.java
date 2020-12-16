@@ -66,12 +66,43 @@ public class Table extends javax.swing.JPanel {
         lastElement.setVisible(true);
     }
     
-        public void addRow1(int id, String name, int price, String category, int available, List<CartElement> list) {
+    public void addRow1(int id, String name, int price, String category, int available, List<CartElement> list) {
         
         int height = 31;
         int minWidth = 622;
         int margin = 4;
         CartElement lastElement = list.get(list.size() - 1);
+        lastElement.setLabels(id, name, price, category, available);
+        
+        // verifying how many elements the list has
+        if (list.size() == 1) {
+            lastElement.setLocation(margin, 6);
+            productContainer.setPreferredSize(new Dimension(this.getPreferredSize().width, productContainer.getPreferredSize().height + 12));
+        } else {
+            lastElement.setLocation(margin, list.get(list.size() - 2).getY() + height + margin);
+        }
+        
+        // treat horizontal scroll
+        if (this.getSize().width < minWidth) {
+            productContainer.setPreferredSize(new Dimension(minWidth, productContainer.getPreferredSize().height + height + margin));
+            productContainer.setSize(minWidth, productContainer.getPreferredSize().height + height + margin);
+            lastElement.setSize(minWidth, height);
+        } else {
+            productContainer.setPreferredSize(new Dimension(Scroll.getPreferredSize().width - 25, productContainer.getPreferredSize().height + height + margin));
+            productContainer.setSize(this.getSize().width - 25, this.getSize().height + height + margin);
+            lastElement.setSize(this.getSize().width - 25, height);
+        }
+        
+        productContainer.add(lastElement);
+        lastElement.setVisible(true);
+    }
+    
+    public void addRow2(int id, String name, int price, String category, int available, List<WhishlistElement> list) {
+        
+        int height = 31;
+        int minWidth = 622;
+        int margin = 4;
+        WhishlistElement lastElement = list.get(list.size() - 1);
         lastElement.setLabels(id, name, price, category, available);
         
         // verifying how many elements the list has
@@ -130,6 +161,8 @@ public class Table extends javax.swing.JPanel {
         setSize(new java.awt.Dimension(622, 200));
 
         Scroll.setBorder(null);
+        Scroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        Scroll.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         productContainer.setBackground(new java.awt.Color(255, 255, 255));
 
