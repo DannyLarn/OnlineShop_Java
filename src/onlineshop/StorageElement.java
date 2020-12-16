@@ -14,13 +14,13 @@ import javax.swing.JOptionPane;
  */
 public class StorageElement extends javax.swing.JPanel {
     private Cart cart;
-    private Whishlist whishlist;
+    private Wishlist whishlist;
     /**
      * Creates new form ShopProductElement
      * @param cart
      * @param whishlist
      */
-    public StorageElement(Cart cart, Whishlist whishlist) {
+    public StorageElement(Cart cart, Wishlist whishlist) {
         initComponents();
         this.cart = cart;
         this.whishlist = whishlist;

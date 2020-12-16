@@ -9,13 +9,13 @@ package onlineshop;
  *
  * @author dnyyy
  */
-public class WhishlistElement extends javax.swing.JPanel {
-    private final Whishlist whishlist;
+public class WishlistElement extends javax.swing.JPanel {
+    private final Wishlist whishlist;
     /**
      * Creates new form ShopProductElement
      * @param whishlist
      */
-    public WhishlistElement(Whishlist whishlist) {
+    public WishlistElement(Wishlist whishlist) {
         initComponents();
         this.whishlist = whishlist;
     }

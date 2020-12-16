@@ -103,12 +103,12 @@ public class Table extends javax.swing.JPanel {
         lastElement.setVisible(true);
     }
     
-    public void addRow2(int id, String name, int price, String category, int available, List<WhishlistElement> list) {
+    public void addRow2(int id, String name, int price, String category, int available, List<WishlistElement> list) {
         
         int height = 31;
         int minWidth = 622;
         int margin = 4;
-        WhishlistElement lastElement = list.get(list.size() - 1);
+        WishlistElement lastElement = list.get(list.size() - 1);
         lastElement.setLabels(id, name, price, category, available);
         
         // verifying how many elements the list has

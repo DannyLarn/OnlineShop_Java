@@ -25,7 +25,7 @@ public class Storage extends Table {
     private final List<StorageElement> allProducts;
     private final List<StorageElement> displayedProducts;
     private Cart cart;
-    private Whishlist whishlist;
+    private Wishlist whishlist;
     private final String filename = "./src/onlineshop/Files/storage.json";
     
     /**
@@ -38,7 +38,7 @@ public class Storage extends Table {
         displayedProducts = new ArrayList();
     }
 
-    public void build(Cart cart, Whishlist whishlist) {
+    public void build(Cart cart, Wishlist whishlist) {
         this.cart = cart;
         this.whishlist = whishlist;
         readProductsFromFile(filename);

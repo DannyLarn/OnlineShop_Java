@@ -15,9 +15,9 @@ import java.util.List;
  *
  * @author dnyyy
  */
-public class Whishlist extends Table {
+public class Wishlist extends Table {
 
-    private final List<WhishlistElement> allProducts;
+    private final List<WishlistElement> allProducts;
 //    private final List<onlineshop.CartElement> displayedProducts;
     
     /**
@@ -26,22 +26,22 @@ public class Whishlist extends Table {
     //
     
     // constructor:
-    public Whishlist() {
+    public Wishlist() {
         allProducts = new ArrayList();
 //        displayedProducts = new ArrayList();
     }
 
     public void addToWhishlist(Product product) {
-        allProducts.add(new WhishlistElement(this));
+        allProducts.add(new WishlistElement(this));
         addRow2(product.getId(), product.getName(), product.getPrice(), product.getCategory(), product.getAvailable(), allProducts);
         main.setWhishlistTotal();
     }
     
-    public void removeFromWhishlist(WhishlistElement whishlistElement) {
+    public void removeFromWhishlist(WishlistElement whishlistElement) {
         resetTable();
         allProducts.remove(whishlistElement);
-        List<WhishlistElement> modifiedList = new ArrayList();
-        for (WhishlistElement element : allProducts) {
+        List<WishlistElement> modifiedList = new ArrayList();
+        for (WishlistElement element : allProducts) {
             modifiedList.add(element);
             Product product = element.getProductPanel();
             // new list needed
@@ -51,7 +51,7 @@ public class Whishlist extends Table {
     }
     
     public boolean find(Product product) {
-        for (WhishlistElement element : allProducts) {
+        for (WishlistElement element : allProducts) {
             if (element.getProductPanel().find(product.getId()) != null) {
                 return true;
             }
@@ -61,7 +61,7 @@ public class Whishlist extends Table {
 
     public String getTotal() {
         int sum = 0;
-        for (WhishlistElement element : allProducts) {
+        for (WishlistElement element : allProducts) {
             sum += element.getProductPanel().getPrice();
         }
         return String.valueOf(sum);
