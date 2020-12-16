@@ -49,6 +49,10 @@ public class Cart extends Table {
         main.setCartTotal();
     }
     
+    public int getCartSize() {
+        return allProducts.size();
+    }
+    
     public boolean quantityVerification(Product product) {
         int counter = 0;
         counter = allProducts.stream().filter((element) -> (element.getProductPanel().find(product.getId()) != null)).map((_item) -> 1).reduce(counter, Integer::sum);

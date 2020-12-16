@@ -73,7 +73,7 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         cartTotal = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        purchaseButton = new javax.swing.JButton();
         sideBar = new javax.swing.JPanel();
         menu = new javax.swing.JPanel();
         homeMenuPoint = new javax.swing.JPanel();
@@ -224,7 +224,12 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("jButton1");
+        purchaseButton.setText("Vásárlás");
+        purchaseButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                purchaseButtonMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout cartPanelLayout = new javax.swing.GroupLayout(cartPanel);
         cartPanel.setLayout(cartPanelLayout);
@@ -243,7 +248,7 @@ public class MainWindow extends javax.swing.JFrame {
                             .addGroup(cartPanelLayout.createSequentialGroup()
                                 .addComponent(cartTotal)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1)))))
+                                .addComponent(purchaseButton)))))
                 .addContainerGap(112, Short.MAX_VALUE))
         );
         cartPanelLayout.setVerticalGroup(
@@ -258,8 +263,8 @@ public class MainWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cartTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addContainerGap(110, Short.MAX_VALUE))
+                    .addComponent(purchaseButton))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout menuPanelsLayout = new javax.swing.GroupLayout(menuPanels);
@@ -533,6 +538,31 @@ public class MainWindow extends javax.swing.JFrame {
         cartTotal.setText("Összeg: " + cart1.getTotal() + "Ft");
     }//GEN-LAST:event_testPanelContainer2MouseClicked
 
+    private void purchaseButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_purchaseButtonMouseClicked
+        try {
+            if (cart1.getCartSize() == 0) {
+                throw new Exception("Nincs a kosarában semmi.");
+            }
+            Purchase purchaseFrame = new Purchase();
+            purchaseFrame.setMainWindow(this);
+            purchaseFrame.setSize(480, 530);
+            purchaseFrame.setLocationRelativeTo(this);
+            purchaseFrame.setVisible(true);
+            this.setVisible(false);
+        } catch (Exception e) {
+            throwError(e, "Hiba", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_purchaseButtonMouseClicked
+
+    private void throwError(Exception e, String errorTitle, int messageType) {
+        JOptionPane optionPane = new JOptionPane(e.getMessage(), messageType);
+        JDialog dialog = optionPane.createDialog(errorTitle);
+        dialog.setLocationByPlatform(true);
+        dialog.setLocationRelativeTo(this);
+        dialog.setAlwaysOnTop(true); // to show top of all other application
+        dialog.setVisible(true); // to visible the dialog
+    }
+    
     private void search() {
         if (searchType.getSelectedIndex() == 0)
             testPanelContainer2.searchByName(searchField.getText());
@@ -582,7 +612,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel cartTotal;
     private javax.swing.JPanel homeMenuPoint;
     private javax.swing.JPanel homePanel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -596,6 +625,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel logo;
     private javax.swing.JPanel menu;
     private javax.swing.JPanel menuPanels;
+    private javax.swing.JButton purchaseButton;
     private javax.swing.JTextField searchField;
     private javax.swing.JComboBox<String> searchType;
     private javax.swing.JPanel sideBar;
