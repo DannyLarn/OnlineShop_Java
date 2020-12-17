@@ -270,6 +270,8 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="cartTotal" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="makeCartEmpty" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
                                       <Component id="purchaseButton" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -292,6 +294,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="cartTotal" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
                           <Component id="purchaseButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="makeCartEmpty" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -329,6 +332,14 @@
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="purchaseButtonMouseClicked"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="makeCartEmpty">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Kos&#xe1;r &#xfc;r&#xed;t&#xe9;s"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="makeCartEmptyMouseClicked"/>
               </Events>
             </Component>
           </SubComponents>

@@ -70,6 +70,7 @@ public class MainWindow extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         cartTotal = new javax.swing.JLabel();
         purchaseButton = new javax.swing.JButton();
+        makeCartEmpty = new javax.swing.JButton();
         sideBar = new javax.swing.JPanel();
         menu = new javax.swing.JPanel();
         homeMenuPoint = new javax.swing.JPanel();
@@ -211,6 +212,13 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        makeCartEmpty.setText("Kosár ürítés");
+        makeCartEmpty.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                makeCartEmptyMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout cartPanelLayout = new javax.swing.GroupLayout(cartPanel);
         cartPanel.setLayout(cartPanelLayout);
         cartPanelLayout.setHorizontalGroup(
@@ -228,6 +236,8 @@ public class MainWindow extends javax.swing.JFrame {
                             .addGroup(cartPanelLayout.createSequentialGroup()
                                 .addComponent(cartTotal)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(makeCartEmpty)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(purchaseButton)))))
                 .addContainerGap(112, Short.MAX_VALUE))
         );
@@ -243,7 +253,8 @@ public class MainWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(cartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cartTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(purchaseButton))
+                    .addComponent(purchaseButton)
+                    .addComponent(makeCartEmpty))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -547,6 +558,18 @@ public class MainWindow extends javax.swing.JFrame {
         setCursor(Cursor.DEFAULT_CURSOR);
     }//GEN-LAST:event_jLabel4MouseExited
 
+    private void makeCartEmptyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_makeCartEmptyMouseClicked
+        try {
+            if (cart1.getCartSize() == 0) {
+                throw new Exception("Nincs a kosarában semmi.");
+            }
+            cart1.removeAll();
+            cartTotal.setText("Összeg: " + cart1.getTotal() + "Ft"); 
+        } catch (Exception e) {
+            throwError(e, "Hiba", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_makeCartEmptyMouseClicked
+
     private void throwError(Exception e, String errorTitle, int messageType) {
         JOptionPane optionPane = new JOptionPane(e.getMessage(), messageType);
         JDialog dialog = optionPane.createDialog(errorTitle);
@@ -616,6 +639,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JPanel logo;
+    private javax.swing.JButton makeCartEmpty;
     private javax.swing.JPanel menu;
     private javax.swing.JPanel menuPanels;
     private javax.swing.JButton purchaseButton;
