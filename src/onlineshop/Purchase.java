@@ -15,19 +15,22 @@ import javax.swing.JOptionPane;
  */
 public class Purchase extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Purchase
-     */
+    // variables
     private MainWindow main;
     private Storage storage;
     private Cart cart;
     private Wishlist wishlist;
     
+    /**
+     * Creates new form Purchase
+     */
+    // constructors:
     public Purchase() {
         initComponents();
         
     }
-
+    
+    // set the needed variables
     public void set(MainWindow main, Storage storage, Cart cart, Wishlist wishlist) {
         this.main = main;
         this.storage = storage;
@@ -35,6 +38,7 @@ public class Purchase extends javax.swing.JFrame {
         this.wishlist = wishlist;
     }
     
+    // execute the purchase functions on classes
     private void purchase() {
         List<Product> chosenProducts = cart.getProducts();
         storage.purchase(chosenProducts);
@@ -166,6 +170,7 @@ public class Purchase extends javax.swing.JFrame {
     }//GEN-LAST:event_numberFieldActionPerformed
 
     private void purchaseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_purchaseMouseClicked
+        // for purchase button it executes the purchase if all field filled
         try {
             if (nameField.getText().isEmpty() || validField.getText().isEmpty() || codeField.getText().isEmpty() || numberField.getText().isEmpty()) {
                 throw new Exception("Hianyosan adta meg az adatait!");
@@ -180,11 +185,13 @@ public class Purchase extends javax.swing.JFrame {
     }//GEN-LAST:event_purchaseMouseClicked
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // window managemant (close)
         this.setVisible(false);
         main.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_formWindowClosing
 
+    // throw a JOptionPane by a given exception and its settings
     private void throwError(Exception e, String errorTitle, int messageType) {
         JOptionPane optionPane = new JOptionPane(e.getMessage(), messageType);
         JDialog dialog = optionPane.createDialog(errorTitle);

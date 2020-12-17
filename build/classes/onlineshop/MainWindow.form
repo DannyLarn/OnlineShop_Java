@@ -169,7 +169,7 @@
                   <Font name="Lucida Grande" size="36" style="0"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="HOME"/>
+                <Property name="text" type="java.lang.String" value="Kezd&#x151;lap"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -185,21 +185,18 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="292" max="-2" attributes="0"/>
-                              <Component id="jLabel6" min="-2" pref="221" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="105" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="wishlistTotal" min="-2" max="-2" attributes="0"/>
-                                  <Component id="wishlist1" max="32767" attributes="0"/>
-                                  <Component id="jSeparator2" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
+                      <EmptySpace min="-2" pref="105" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="wishlistTotal" min="-2" max="-2" attributes="0"/>
+                          <Component id="wishlist1" max="32767" attributes="0"/>
+                          <Component id="jSeparator2" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace pref="112" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jLabel6" min="-2" pref="260" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="288" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -228,7 +225,7 @@
                   <Font name="Lucida Grande" size="36" style="0"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="WHISHLIST"/>
+                <Property name="text" type="java.lang.String" value="K&#xed;v&#xe1;ns&#xe1;g lista"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="wishlistTotal">
@@ -310,7 +307,7 @@
                   <Font name="Lucida Grande" size="36" style="0"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="CART"/>
+                <Property name="text" type="java.lang.String" value="Kos&#xe1;r"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JSeparator" name="jSeparator1">
@@ -449,7 +446,7 @@
                       <Font name="Monaco" size="18" style="0"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="Home"/>
+                    <Property name="text" type="java.lang.String" value="Kezd&#x151;lap"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -493,7 +490,7 @@
                       <Font name="Monaco" size="18" style="0"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="Wishlist"/>
+                    <Property name="text" type="java.lang.String" value="Kiv&#xe1;ns&#xe1;g lista"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -537,7 +534,7 @@
                       <Font name="Monaco" size="18" style="0"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="Cart"/>
+                    <Property name="text" type="java.lang.String" value="Kos&#xe1;r"/>
                   </Properties>
                 </Component>
               </SubComponents>

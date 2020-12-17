@@ -16,11 +16,10 @@ import javax.swing.JPanel;
  * @author dnyyy
  */
 public class MainWindow extends javax.swing.JFrame {
-
     /**
      * Creates new form MainWindow
      */
-    
+    // constructor: 
     public MainWindow() {
         initComponents();
         storage1.build(cart1, wishlist1);
@@ -31,14 +30,17 @@ public class MainWindow extends javax.swing.JFrame {
         setMenu(homePanel);
     }
 
+    // change the total label at cart
     public void setCartTotal() {
         cartTotal.setText("Összeg: " + cart1.getTotal() + "Ft");
     }
     
+    // change the total label at wishlist
     public void setWhishlistTotal() {
         wishlistTotal.setText("Összeg: " + wishlist1.getTotal() + "Ft");
     }
     
+    // set the chosen menu
     private void setMenu(JPanel panel) {
         homePanel.setVisible(homePanel.equals(panel));
         wishlistPanel.setVisible(wishlistPanel.equals(panel));
@@ -114,7 +116,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Lucida Grande", 0, 36)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("HOME");
+        jLabel7.setText("Kezdőlap");
 
         javax.swing.GroupLayout homePanelLayout = new javax.swing.GroupLayout(homePanel);
         homePanel.setLayout(homePanelLayout);
@@ -158,7 +160,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Lucida Grande", 0, 36)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("WHISHLIST");
+        jLabel6.setText("Kívánság lista");
 
         wishlistTotal.setBackground(new java.awt.Color(255, 255, 255));
         wishlistTotal.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
@@ -169,17 +171,16 @@ public class MainWindow extends javax.swing.JFrame {
         wishlistPanelLayout.setHorizontalGroup(
             wishlistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(wishlistPanelLayout.createSequentialGroup()
-                .addGroup(wishlistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(wishlistPanelLayout.createSequentialGroup()
-                        .addGap(292, 292, 292)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(wishlistPanelLayout.createSequentialGroup()
-                        .addGap(105, 105, 105)
-                        .addGroup(wishlistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(wishlistTotal)
-                            .addComponent(wishlist1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jSeparator2))))
+                .addGap(105, 105, 105)
+                .addGroup(wishlistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(wishlistTotal)
+                    .addComponent(wishlist1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator2))
                 .addContainerGap(112, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, wishlistPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(288, 288, 288))
         );
         wishlistPanelLayout.setVerticalGroup(
             wishlistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,7 +200,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Lucida Grande", 0, 36)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("CART");
+        jLabel8.setText("Kosár");
 
         cartTotal.setBackground(new java.awt.Color(255, 255, 255));
         cartTotal.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
@@ -294,7 +295,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Monaco", 0, 18)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Home");
+        jLabel2.setText("Kezdőlap");
 
         javax.swing.GroupLayout homeMenuPointLayout = new javax.swing.GroupLayout(homeMenuPoint);
         homeMenuPoint.setLayout(homeMenuPointLayout);
@@ -328,7 +329,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Monaco", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Wishlist");
+        jLabel1.setText("Kivánság lista");
 
         javax.swing.GroupLayout wishlistMenuPointLayout = new javax.swing.GroupLayout(wishlistMenuPoint);
         wishlistMenuPoint.setLayout(wishlistMenuPointLayout);
@@ -362,7 +363,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Monaco", 0, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Cart");
+        jLabel3.setText("Kosár");
 
         javax.swing.GroupLayout cartMenuPointLayout = new javax.swing.GroupLayout(cartMenuPoint);
         cartMenuPoint.setLayout(cartMenuPointLayout);
@@ -524,6 +525,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_searchTypeItemStateChanged
 
     private void purchaseButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_purchaseButtonMouseClicked
+        // if we have any product in cart then we go to the purchase window
         try {
             if (cart1.getCartSize() == 0) {
                 throw new Exception("Nincs a kosarában semmi.");
@@ -540,8 +542,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_purchaseButtonMouseClicked
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        
-        // the magic happens here
+        // save wishlist and cart if we exit
         cart1.saveCart();
         wishlist1.saveWishlist();
     }//GEN-LAST:event_formWindowClosing
@@ -559,6 +560,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel4MouseExited
 
     private void makeCartEmptyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_makeCartEmptyMouseClicked
+        // if we does not have anything in cart we cant make it empty because its already empty otherwise it makes it empty
         try {
             if (cart1.getCartSize() == 0) {
                 throw new Exception("Nincs a kosarában semmi.");
@@ -570,6 +572,7 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_makeCartEmptyMouseClicked
 
+    // throws a JOptionPane by a given exception and its settings
     private void throwError(Exception e, String errorTitle, int messageType) {
         JOptionPane optionPane = new JOptionPane(e.getMessage(), messageType);
         JDialog dialog = optionPane.createDialog(errorTitle);

@@ -9,26 +9,31 @@ package onlineshop;
  *
  * @author dnyyy
  */
-public class WishlistElement extends javax.swing.JPanel {
-    private final Wishlist whishlist;
+public class CartElement extends javax.swing.JPanel {
+    // variables:
+    private final Cart cart;
     /**
      * Creates new form ShopProductElement
-     * @param whishlist
+     * @param cart
      */
-    public WishlistElement(Wishlist whishlist) {
+    // constructor:
+    public CartElement(Cart cart) {
         initComponents();
-        this.whishlist = whishlist;
+        this.cart = cart;
     }
     
+    // set labels of element by a string array
     public void setLabels(String product[]) {
         testPanel1.setLabelsByArray(product);
     }
     
+    // set labels of element by product parameters
     public void setLabels(int id, String name, int price, String category, int available) {
         testPanel1.setLabelsByParameters(id, name, price, category, available);
     }
     
-    public onlineshop.Product getProductPanel() {
+    // returns the elements product object
+    public Product getProductPanel() {
         return testPanel1;
     }
     
@@ -79,7 +84,8 @@ public class WishlistElement extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
-        whishlist.removeFromWishlist(this);
+        // remove this element if its button has been clicked
+        cart.removeFromCart(this);
     }//GEN-LAST:event_deleteMouseClicked
 
 

@@ -6,7 +6,6 @@
 package onlineshop;
 
 import java.awt.Dimension;
-import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -15,26 +14,28 @@ import javax.swing.JOptionPane;
  * @author dnyyy
  */
 public class Table extends javax.swing.JPanel {
-
+    // variables:
+    protected MainWindow main;
+    // these are for setting the right sizes
+    protected final int height = 31;
+    protected final int minWidth = 622;
+    protected final int margin = 4;
     /**
      * Creates new from StoragePanel
      */
     //
-    protected MainWindow main;
-    protected final int height = 31;
-    protected final int minWidth = 622;
-    protected final int margin = 4;
-    
     // constructor:
     public Table() {
         initComponents();
         Scroll.getVerticalScrollBar().setUnitIncrement(16);
     }
     
+    // setter for main variable (sometimes we have to access to main (e.g. total output))
     public void setMain(MainWindow main) {
         this.main = main;
     }
     
+    // prepare for a new element
     public void addRowSettings(int listSize) {
         if (listSize == 1) {
             productContainer.setPreferredSize(new Dimension(this.getPreferredSize().width, productContainer.getPreferredSize().height + 12));
@@ -49,18 +50,18 @@ public class Table extends javax.swing.JPanel {
         }
     }
     
-    public void addToWishlistContainer(WishlistElement element) {
+    // add the appropiate element to Table
+    public void addWishlistElement(WishlistElement element) {
+        productContainer.add(element);
+    }
+    public void addStorageElement(StorageElement element) {
+        productContainer.add(element);
+    }
+    public void addCartElement(CartElement element) {
         productContainer.add(element);
     }
     
-    public void addToStorageContainer(StorageElement element) {
-        productContainer.add(element);
-    }
-    
-    public void addToCartContainer(CartElement element) {
-        productContainer.add(element);
-    }
-    
+    // throws JOptionPane by the given exception
     public void throwMessage(Exception e, String errorTitle, int messageType) {
         JOptionPane optionPane = new JOptionPane(e.getMessage(), messageType);
         JDialog dialog = optionPane.createDialog(errorTitle);
@@ -70,6 +71,7 @@ public class Table extends javax.swing.JPanel {
         dialog.setVisible(true); // to visible the dialog
     }
     
+    // remove all element from table and set its value for basic
     public void resetTable() {
         productContainer.removeAll();
         productContainer.repaint();

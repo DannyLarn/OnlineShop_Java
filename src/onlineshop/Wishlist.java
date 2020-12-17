@@ -23,27 +23,26 @@ import org.json.simple.parser.JSONParser;
  * @author dnyyy
  */
 public class Wishlist extends Table {
-
+    // variables
     private final List<WishlistElement> allProducts;
-//    private final List<onlineshop.CartElement> displayedProducts;
     
     /**
      * Creates new from StoragePanel
      */
     //
-    
     // constructor:
     public Wishlist() {
         allProducts = new ArrayList();
-//        displayedProducts = new ArrayList();
     }
 
+    // add a given product to wishlist
     public void addToWishlist(Product product) {
         allProducts.add(new WishlistElement(this));
         addNewRow(product.getId(), product.getName(), product.getPrice(), product.getCategory(), product.getAvailable(), allProducts);
         main.setWhishlistTotal();
     }
     
+    // remove a give wishlist element from wishlist (a wishlist element has a product and unique buttons)
     public void removeFromWishlist(WishlistElement whishlistElement) {
         resetTable();
         allProducts.remove(whishlistElement);
@@ -56,6 +55,7 @@ public class Wishlist extends Table {
         main.setWhishlistTotal();
     }
     
+    // return true if the given product is in the wishlist otherwise false
     public boolean find(Product product) {
         for (WishlistElement element : allProducts) {
             if (element.getProductPanel().find(product.getId()) != null) {
@@ -64,7 +64,18 @@ public class Wishlist extends Table {
         }
         return false;
     }
+        
+    // return a product if the given id is in the list
+    private Product find(int id) {
+        for (WishlistElement element : allProducts) {
+            if (element.getProductPanel().getId() == id) {
+                return element.getProductPanel();
+            }
+        }
+        return null;
+    }
 
+    // return the total number of price of the list converted into string
     public String getTotal() {
         int sum = 0;
         for (WishlistElement element : allProducts) {
@@ -72,7 +83,18 @@ public class Wishlist extends Table {
         }
         return String.valueOf(sum);
     }
-    
+        
+    // if the user buys something it updates its availability
+    public void purchase(List<Product> products) {
+        for (Product product : products) {
+            Product prod = find(product.getId());
+            if (prod != null) {
+                prod.setAvailable(prod.getAvailable() - 1);
+            }
+        }
+    }
+
+    // load the wishlist from file
     public void loadWishlist() {
         
         JSONParser parser = new JSONParser();
@@ -95,28 +117,9 @@ public class Wishlist extends Table {
         } catch (Exception e) {
             throwMessage(e, "Fajl beolvasasi hiba", JOptionPane.WARNING_MESSAGE);
         }
-    
     }
-    
-    public void purchase(List<Product> products) {
-        
-        for (Product product : products) {
-            Product prod = find(product.getId());
-            if (prod != null) {
-                prod.setAvailable(prod.getAvailable() - 1);
-            }
-        }
-    }
-    
-    private Product find(int id) {
-        for (WishlistElement element : allProducts) {
-            if (element.getProductPanel().getId() == id) {
-                return element.getProductPanel();
-            }
-        }
-        return null;
-    }
-    
+
+    // save wihslist's elements into a json file
     public void saveWishlist() {
         JSONArray wishlistList = new JSONArray();
         
@@ -141,18 +144,11 @@ public class Wishlist extends Table {
             file.write(result.toJSONString());
             file.close();
         } catch(IOException e) {
-            throwError(e, "Fajl kiiras problema", JOptionPane.ERROR_MESSAGE);
+            throwMessage(e, "Fajl kiiras problema", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-    private void throwError(Exception e, String errorTitle, int messageType) {
-        JOptionPane optionPane = new JOptionPane(e.getMessage(), messageType);
-        JDialog dialog = optionPane.createDialog(errorTitle);
-        dialog.setLocationByPlatform(true);
-        dialog.setLocationRelativeTo(this);
-        dialog.setAlwaysOnTop(true); // to show top of all other application
-        dialog.setVisible(true); // to visible the dialog
-    }
+
+    // add a new row to the table and the given list by the appropriate product parameters
     public void addNewRow(int id, String name, int price, String category, int available, List<WishlistElement> list) {
         
         WishlistElement lastElement = list.get(list.size() - 1);
@@ -166,7 +162,7 @@ public class Wishlist extends Table {
         if (this.getSize().width < minWidth) lastElement.setSize(minWidth, height);
         else lastElement.setSize(this.getSize().width - 25, height);
         
-        addToWishlistContainer(lastElement);
+        addWishlistElement(lastElement);
         lastElement.setVisible(true);
     }
 }

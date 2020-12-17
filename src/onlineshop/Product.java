@@ -9,8 +9,9 @@ package onlineshop;
  *
  * @author dnyyy
  */
-public class Product extends javax.swing.JPanel {
+public final class Product extends javax.swing.JPanel {
 
+    // variables:
     private int id;
     private String name;
     private int price;
@@ -20,98 +21,99 @@ public class Product extends javax.swing.JPanel {
     /**
      * Creates new form TestPanel
      */
-    
+    // constructors:
     public Product() {
         initComponents();
     }
-    
     public Product(int id, String name, int price, String category, int available) {
         initComponents();
         setLabelsByParameters(id, name, price, category, available);
     }
-    
     public Product(String product[]) {
         initComponents();
         setLabelsByArray(product);
     }
     
+    // getter functions:
     public int getId() {
         return id;
     }
-    
     @Override
     public String getName() {
         return name;
     }
-    
     public int getPrice() {
         return price;
     }
-    
     public String getCategory() {
         return category;
     }
-    
     public int getAvailable() {
         return available;
     }
+            
+    // return this Product if the given id equals
+    public Product find(int index) {
+        return index == id ? this : null;
+    }
     
+    // setter funciton for variable and label
     public void setAvailable(int available) {
         this.available = available;
         labelAvailable.setText(String.valueOf(available) + "db");
     }
-    
+
+    // set the Product's labels by a string array
     public void setLabelsByArray(String product[]) {
-        labelId.setText(product[0] + ".");
-        labelName.setText(product[1]);
-        labelPrice.setText(product[2] + "Ft");
-        labelCategory.setText("#" + product[3]);
-        labelAvailable.setText(product[4] + "db");
-        
-        this.id = Integer.parseInt(product[0]);
-        this.name = product[1];
-        this.price = Integer.parseInt(product[2]);
-        this.category = product[3];
-        this.available = Integer.parseInt(product[4]);
-        
+        setLabelTexts(product[0], product[1], product[2], product[3], product[4]);
+        setVariables(Integer.parseInt(product[0]), product[1], Integer.parseInt(product[2]), product[3], Integer.parseInt(product[4]));
         setToolTipTexts();
     }
     
+    // set the Product's labels by parameters (id, name, price, ... )
     public void setLabelsByParameters(int id, String name, int price, String category, int available) {
-        labelId.setText(String.valueOf(id) + ".");
-        labelName.setText(name);
-        labelPrice.setText(String.valueOf(price) + "Ft");
-        labelCategory.setText("#" + category);
-        labelAvailable.setText(String.valueOf(available) + "db");
-        
+        setLabelTexts(String.valueOf(id), name, String.valueOf(price), category, String.valueOf(available));
+        setVariables(id, name, price, category, available);
+        setToolTipTexts();
+    }
+    
+    // set all given parameters to global variables
+    private void setVariables(int id, String name, int price, String category, int available) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.category = category;
         this.available = available;
-        
-        setToolTipTexts();
     }
     
+    // set given parameters to the appropiate label
+    private void setLabelTexts(String id, String name, String price, String category, String available) {
+        labelId.setText(id + ".");
+        labelName.setText(name);
+        labelPrice.setText(price + "Ft");
+        labelCategory.setText("#" + category);
+        labelAvailable.setText(available + "db");
+    }
+    
+    // set label's tool text tip to get informations about Product (e.g. too long Product name)
     private void setToolTipTexts() {
-        labelId.setToolTipText(labelId.getText());
-        labelName.setToolTipText(labelName.getText());
-        labelPrice.setToolTipText(labelPrice.getText());
-        labelCategory.setToolTipText(labelCategory.getText());
-        labelAvailable.setToolTipText(labelAvailable.getText());
+        labelId.setToolTipText("Azonosító: " + labelId.getText());
+        labelName.setToolTipText("Név: " + labelName.getText());
+        labelPrice.setToolTipText("Ár: " + labelPrice.getText());
+        labelCategory.setToolTipText("Kategória: " + labelCategory.getText());
+        labelAvailable.setToolTipText("Raktáron: " + labelAvailable.getText());
     }
     
+    // return true a Product's name contains the given text
     public boolean searchByName(String search) {
         return name.toLowerCase().contains(search.trim().toLowerCase());
     }
     
+    // return true a Product's category contains the given text
     public boolean searchByCategory(String search) {
         return category.toLowerCase().contains(search.trim().toLowerCase());
     }
-    
-    public Product find(int index) {
-        return index == id ? this : null;
-    }
+
         
     /**
      * This method is called from within the constructor to initialize the form. WARNING: Do NOT modify this code. The

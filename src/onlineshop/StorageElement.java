@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
  * @author dnyyy
  */
 public class StorageElement extends javax.swing.JPanel {
+    // variables:
     private Cart cart;
     private Wishlist whishlist;
     /**
@@ -20,6 +21,7 @@ public class StorageElement extends javax.swing.JPanel {
      * @param cart
      * @param whishlist
      */
+    // constructors:
     public StorageElement(Cart cart, Wishlist whishlist) {
         initComponents();
         this.cart = cart;
@@ -29,15 +31,18 @@ public class StorageElement extends javax.swing.JPanel {
         productPanel.setLabelsByParameters(id, name, price, category, available);
     }
 
+    // set labels of element by string array
     public void setLabels(String product[]) {
         productPanel.setLabelsByArray(product);
     }
     
+    // set labels of element by product parameters
     public void setLabels(int id, String name, int price, String category, int available) {
         productPanel.setLabelsByParameters(id, name, price, category, available);
     }
     
-    public onlineshop.Product getProductPanel() {
+    // returns the product of this element
+    public Product getProductPanel() {
         return productPanel;
     }
     
@@ -109,6 +114,7 @@ public class StorageElement extends javax.swing.JPanel {
     }//GEN-LAST:event_cartButtonActionPerformed
 
     private void cartButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cartButtonMouseClicked
+        // exception if we have all the products in the cart what is available
         try {
             if (cart.quantityVerification(this.productPanel) || this.productPanel.getAvailable() == 0) {
                 throw new Exception("A kivalasztott termekbol nincs tobb.");
@@ -120,6 +126,7 @@ public class StorageElement extends javax.swing.JPanel {
     }//GEN-LAST:event_cartButtonMouseClicked
 
     private void whishlistButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_whishlistButtonMouseClicked
+        // exception if the product is already on the wishlist
         try {
             if (whishlist.find(this.getProductPanel())) {
                 throw new Exception("Ezt az elemet mar hozzaadta a listahoz!");
@@ -130,6 +137,7 @@ public class StorageElement extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_whishlistButtonMouseClicked
 
+    // throws a JOptionPane by the given exception and its settings
     private void throwError(Exception e, String errorTitle, int messageType) {
         JOptionPane optionPane = new JOptionPane(e.getMessage(), messageType);
         JDialog dialog = optionPane.createDialog(errorTitle);

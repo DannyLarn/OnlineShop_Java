@@ -5,7 +5,6 @@
  */
 package onlineshop;
 
-import java.awt.Dimension;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -36,12 +35,14 @@ public class Cart extends Table {
         allProducts = new ArrayList();
     }
 
+    // add the given product into cart
     public void addToCart(Product product) {
         allProducts.add(new CartElement(this));
         addNewRow(product.getId(), product.getName(), product.getPrice(), product.getCategory(), product.getAvailable(), allProducts);
         main.setCartTotal();
     }
     
+    // remove the given cartElement from cart (cart element contains a product and unique button(s))
     public void removeFromCart(CartElement cartElement) {
         resetTable();
         allProducts.remove(cartElement);
@@ -55,17 +56,29 @@ public class Cart extends Table {
         main.setCartTotal();
     }
     
+    // returns the carts size (how many elements it has)
     public int getCartSize() {
         return allProducts.size();
     }
     
+    // returns true if the given product is included in the cart less or equal than its availability
     public boolean quantityVerification(Product product) {
         int counter = 0;
         counter = allProducts.stream().filter((element) -> (element.getProductPanel().find(product.getId()) != null)).map((_item) -> 1).reduce(counter, Integer::sum);
         
         return counter >= product.getAvailable();
     }
-    
+
+    // returns the whole list of products 
+    public List<Product> getProducts() {
+        List<Product> products = new ArrayList();
+        for (CartElement element : allProducts) {
+            products.add(element.getProductPanel());
+        }
+        return products;
+    }
+        
+    // returns cart's total converted into string
     public String getTotal() {
         int sum = 0;
         for (CartElement element : allProducts) {
@@ -74,20 +87,13 @@ public class Cart extends Table {
         return String.valueOf(sum);
     }
     
-    public List<Product> getProducts() {
-        List<Product> products = new ArrayList();
-        for (CartElement element : allProducts) {
-            products.add(element.getProductPanel());
-        }
-        return products;
-    }
-    
-    @Override
-    public void removeAll() {
+    // remove all elements from cart
+    @Override public void removeAll() {
         resetTable();
         allProducts.removeAll(allProducts);
     }
     
+    // load cart elements from json file
     public void loadCart() {
         JSONParser parser = new JSONParser();
         try {
@@ -112,6 +118,7 @@ public class Cart extends Table {
     
     }
     
+    // save datas into json file
     public void saveCart() {
         JSONArray wishlistList = new JSONArray();
         
@@ -136,19 +143,12 @@ public class Cart extends Table {
             file.write(result.toJSONString());
             file.close();
         } catch(IOException e) {
-            throwError(e, "Fajl kiiras problema", JOptionPane.ERROR_MESSAGE);
+            throwMessage(e, "Fajl kiiras problema", JOptionPane.ERROR_MESSAGE);
         }
     }
+
     
-    private void throwError(Exception e, String errorTitle, int messageType) {
-        JOptionPane optionPane = new JOptionPane(e.getMessage(), messageType);
-        JDialog dialog = optionPane.createDialog(errorTitle);
-        dialog.setLocationByPlatform(true);
-        dialog.setLocationRelativeTo(this);
-        dialog.setAlwaysOnTop(true); // to show top of all other application
-        dialog.setVisible(true); // to visible the dialog
-    }
-    
+    // add a new row to the table and the given list by the appropriate product parameters
     public void addNewRow(int id, String name, int price, String category, int available, List<CartElement> list) {
         
         CartElement lastElement = list.get(list.size() - 1);
@@ -162,7 +162,7 @@ public class Cart extends Table {
         if (this.getSize().width < minWidth) lastElement.setSize(minWidth, height);
         else lastElement.setSize(this.getSize().width - 25, height);
         
-        addToCartContainer(lastElement);
+        addCartElement(lastElement);
         lastElement.setVisible(true);
     }
 }
