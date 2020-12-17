@@ -37,9 +37,8 @@ public class Cart extends Table {
     }
 
     public void addToCart(Product product) {
-        // exception for too many selection 
         allProducts.add(new CartElement(this));
-        addRow1(product.getId(), product.getName(), product.getPrice(), product.getCategory(), product.getAvailable(), allProducts);
+        addNewRow(product.getId(), product.getName(), product.getPrice(), product.getCategory(), product.getAvailable(), allProducts);
         main.setCartTotal();
     }
     
@@ -51,7 +50,7 @@ public class Cart extends Table {
             modifiedList.add(element);
             Product product = element.getProductPanel();
             // new list needed
-            addRow1(product.getId(), product.getName(), product.getPrice(), product.getCategory(), product.getAvailable(), modifiedList);
+            addNewRow(product.getId(), product.getName(), product.getPrice(), product.getCategory(), product.getAvailable(), modifiedList);
         }
         main.setCartTotal();
     }
@@ -148,5 +147,22 @@ public class Cart extends Table {
         dialog.setLocationRelativeTo(this);
         dialog.setAlwaysOnTop(true); // to show top of all other application
         dialog.setVisible(true); // to visible the dialog
+    }
+    
+    public void addNewRow(int id, String name, int price, String category, int available, List<CartElement> list) {
+        
+        CartElement lastElement = list.get(list.size() - 1);
+        lastElement.setLabels(id, name, price, category, available);
+        addRowSettings(list.size());
+        // verifying how many elements the list has
+        if (list.size() == 1) lastElement.setLocation(margin, 6);
+        else lastElement.setLocation(margin, list.get(list.size() - 2).getY() + height + margin);
+        
+        // treat horizontal scroll
+        if (this.getSize().width < minWidth) lastElement.setSize(minWidth, height);
+        else lastElement.setSize(this.getSize().width - 25, height);
+        
+        addToCartContainer(lastElement);
+        lastElement.setVisible(true);
     }
 }

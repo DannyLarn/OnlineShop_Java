@@ -62,7 +62,7 @@ public class Storage extends Table {
                 int available = Integer.parseInt(prod.get("available").toString());
                 
                 allProducts.add(new StorageElement(cart, whishlist));
-                addRow(id, name, price, category, available, allProducts);
+                addNewRow(id, name, price, category, available, allProducts);
             }
             
         } catch (Exception e) {
@@ -115,7 +115,7 @@ public class Storage extends Table {
             Product prod = panel.getProductPanel();
             if ((type.equals("name") && prod.searchByName(search)) || (type.equals("category") && prod.searchByCategory(search))) {
                 displayedProducts.add(panel);
-                addRow(prod.getId(), prod.getName(), prod.getPrice(), prod.getCategory(), prod.getAvailable(), displayedProducts);
+                addNewRow(prod.getId(), prod.getName(), prod.getPrice(), prod.getCategory(), prod.getAvailable(), displayedProducts);
             }
         }
     }
@@ -178,5 +178,21 @@ public class Storage extends Table {
     public void searchByCategory(String search) {
         search(search, "category");
     }
-                   
+            
+    public void addNewRow(int id, String name, int price, String category, int available, List<StorageElement> list) {
+        
+        StorageElement lastElement = list.get(list.size() - 1);
+        lastElement.setLabels(id, name, price, category, available);
+        addRowSettings(list.size());
+        // verifying how many elements the list has
+        if (list.size() == 1) lastElement.setLocation(margin, 6);
+        else lastElement.setLocation(margin, list.get(list.size() - 2).getY() + height + margin);
+        
+        // treat horizontal scroll
+        if (this.getSize().width < minWidth) lastElement.setSize(minWidth, height);
+        else lastElement.setSize(this.getSize().width - 25, height);
+        
+        addToStorageContainer(lastElement);
+        lastElement.setVisible(true);
+    }
 }

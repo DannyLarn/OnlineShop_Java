@@ -21,9 +21,9 @@ public class Table extends javax.swing.JPanel {
      */
     //
     protected MainWindow main;
-    private final int height = 31;
-    private final int minWidth = 622;
-    private final int margin = 4;
+    protected final int height = 31;
+    protected final int minWidth = 622;
+    protected final int margin = 4;
     
     // constructor:
     public Table() {
@@ -35,89 +35,30 @@ public class Table extends javax.swing.JPanel {
         this.main = main;
     }
     
-    // add a new row to the table
-    public void addRow(int id, String name, int price, String category, int available, List<StorageElement> list) {
-        
-        StorageElement lastElement = list.get(list.size() - 1);
-        lastElement.setLabels(id, name, price, category, available);
-        
-        // verifying how many elements the list has
-        if (list.size() == 1) {
-            lastElement.setLocation(margin, 6);
+    public void addRowSettings(int listSize) {
+        if (listSize == 1) {
             productContainer.setPreferredSize(new Dimension(this.getPreferredSize().width, productContainer.getPreferredSize().height + 12));
-        } else {
-            lastElement.setLocation(margin, list.get(list.size() - 2).getY() + height + margin);
         }
         
-        // treat horizontal scroll
         if (this.getSize().width < minWidth) {
             productContainer.setPreferredSize(new Dimension(minWidth, productContainer.getPreferredSize().height + height + margin));
             productContainer.setSize(minWidth, productContainer.getPreferredSize().height + height + margin);
-            lastElement.setSize(minWidth, height);
         } else {
             productContainer.setPreferredSize(new Dimension(Scroll.getPreferredSize().width - 25, productContainer.getPreferredSize().height + height + margin));
             productContainer.setSize(this.getSize().width - 25, this.getSize().height + height + margin);
-            lastElement.setSize(this.getSize().width - 25, height);
         }
-        
-        productContainer.add(lastElement);
-        lastElement.setVisible(true);
     }
     
-    public void addRow1(int id, String name, int price, String category, int available, List<CartElement> list) {
-        
-        CartElement lastElement = list.get(list.size() - 1);
-        lastElement.setLabels(id, name, price, category, available);
-        
-        // verifying how many elements the list has
-        if (list.size() == 1) {
-            lastElement.setLocation(margin, 6);
-            productContainer.setPreferredSize(new Dimension(this.getPreferredSize().width, productContainer.getPreferredSize().height + 12));
-        } else {
-            lastElement.setLocation(margin, list.get(list.size() - 2).getY() + height + margin);
-        }
-        
-        // treat horizontal scroll
-        if (this.getSize().width < minWidth) {
-            productContainer.setPreferredSize(new Dimension(minWidth, productContainer.getPreferredSize().height + height + margin));
-            productContainer.setSize(minWidth, productContainer.getPreferredSize().height + height + margin);
-            lastElement.setSize(minWidth, height);
-        } else {
-            productContainer.setPreferredSize(new Dimension(Scroll.getPreferredSize().width - 25, productContainer.getPreferredSize().height + height + margin));
-            productContainer.setSize(this.getSize().width - 25, this.getSize().height + height + margin);
-            lastElement.setSize(this.getSize().width - 25, height);
-        }
-        
-        productContainer.add(lastElement);
-        lastElement.setVisible(true);
+    public void addToWishlistContainer(WishlistElement element) {
+        productContainer.add(element);
     }
     
-    public void addRow2(int id, String name, int price, String category, int available, List<WishlistElement> list) {
-        
-        WishlistElement lastElement = list.get(list.size() - 1);
-        lastElement.setLabels(id, name, price, category, available);
-        
-        // verifying how many elements the list has
-        if (list.size() == 1) {
-            lastElement.setLocation(margin, 6);
-            productContainer.setPreferredSize(new Dimension(this.getPreferredSize().width, productContainer.getPreferredSize().height + 12));
-        } else {
-            lastElement.setLocation(margin, list.get(list.size() - 2).getY() + height + margin);
-        }
-        
-        // treat horizontal scroll
-        if (this.getSize().width < minWidth) {
-            productContainer.setPreferredSize(new Dimension(minWidth, productContainer.getPreferredSize().height + height + margin));
-            productContainer.setSize(minWidth, productContainer.getPreferredSize().height + height + margin);
-            lastElement.setSize(minWidth, height);
-        } else {
-            productContainer.setPreferredSize(new Dimension(Scroll.getPreferredSize().width - 25, productContainer.getPreferredSize().height + height + margin));
-            productContainer.setSize(this.getSize().width - 25, this.getSize().height + height + margin);
-            lastElement.setSize(this.getSize().width - 25, height);
-        }
-        
-        productContainer.add(lastElement);
-        lastElement.setVisible(true);
+    public void addToStorageContainer(StorageElement element) {
+        productContainer.add(element);
+    }
+    
+    public void addToCartContainer(CartElement element) {
+        productContainer.add(element);
     }
     
     public void throwMessage(Exception e, String errorTitle, int messageType) {
