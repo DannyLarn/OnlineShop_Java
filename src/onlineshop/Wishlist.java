@@ -5,6 +5,7 @@
  */
 package onlineshop;
 
+import com.oracle.jrockit.jfr.Producer;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -95,6 +96,25 @@ public class Wishlist extends Table {
             throwMessage(e, "Fajl beolvasasi hiba", JOptionPane.WARNING_MESSAGE);
         }
     
+    }
+    
+    public void purchase(List<Product> products) {
+        
+        for (Product product : products) {
+            Product prod = find(product.getId());
+            if (prod != null) {
+                prod.setAvailable(prod.getAvailable() - 1);
+            }
+        }
+    }
+    
+    private Product find(int id) {
+        for (WishlistElement element : allProducts) {
+            if (element.getProductPanel().getId() == id) {
+                return element.getProductPanel();
+            }
+        }
+        return null;
     }
     
     public void saveWishlist() {

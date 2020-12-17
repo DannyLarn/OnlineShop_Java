@@ -6,16 +6,9 @@
 package onlineshop;
 
 import java.awt.Dimension;
-import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 /**
  *
@@ -27,8 +20,10 @@ public class Table extends javax.swing.JPanel {
      * Creates new from StoragePanel
      */
     //
-    
     protected MainWindow main;
+    private final int height = 31;
+    private final int minWidth = 622;
+    private final int margin = 4;
     
     // constructor:
     public Table() {
@@ -43,9 +38,6 @@ public class Table extends javax.swing.JPanel {
     // add a new row to the table
     public void addRow(int id, String name, int price, String category, int available, List<StorageElement> list) {
         
-        int height = 31;
-        int minWidth = 622;
-        int margin = 4;
         StorageElement lastElement = list.get(list.size() - 1);
         lastElement.setLabels(id, name, price, category, available);
         
@@ -74,9 +66,6 @@ public class Table extends javax.swing.JPanel {
     
     public void addRow1(int id, String name, int price, String category, int available, List<CartElement> list) {
         
-        int height = 31;
-        int minWidth = 622;
-        int margin = 4;
         CartElement lastElement = list.get(list.size() - 1);
         lastElement.setLabels(id, name, price, category, available);
         
@@ -105,9 +94,6 @@ public class Table extends javax.swing.JPanel {
     
     public void addRow2(int id, String name, int price, String category, int available, List<WishlistElement> list) {
         
-        int height = 31;
-        int minWidth = 622;
-        int margin = 4;
         WishlistElement lastElement = list.get(list.size() - 1);
         lastElement.setLabels(id, name, price, category, available);
         

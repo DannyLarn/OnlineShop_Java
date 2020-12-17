@@ -1,17 +1,1 @@
-{
-    "total": [{
-            "price": 100,
-            "name": "alma",
-            "available": 13,
-            "id": 1,
-            "category": "gyumolcs"
-        }, {
-            "price": 100,
-            "name": "alma",
-            "available": 13,
-            "id": 1,
-            "category": "gyumolcs"
-        }, {
-            "total": "200"
-        }]
-}
+{"total":[{"price":70,"name":"kifli","available":1,"id":5,"category":"pekaru"},{"total":"70"}]}

@@ -400,6 +400,17 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Monaco", 0, 18)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("JAVAsolt Bolt");
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel4MouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel4MouseEntered(evt);
+            }
+        });
 
         javax.swing.GroupLayout logoLayout = new javax.swing.GroupLayout(logo);
         logo.setLayout(logoLayout);
@@ -507,7 +518,7 @@ public class MainWindow extends javax.swing.JFrame {
                 throw new Exception("Nincs a kosarában semmi.");
             }
             Purchase purchaseFrame = new Purchase();
-            purchaseFrame.set(this, storage1, cart1);
+            purchaseFrame.set(this, storage1, cart1, wishlist1);
             purchaseFrame.setSize(480, 530);
             purchaseFrame.setLocationRelativeTo(this);
             purchaseFrame.setVisible(true);
@@ -523,6 +534,18 @@ public class MainWindow extends javax.swing.JFrame {
         cart1.saveCart();
         wishlist1.saveWishlist();
     }//GEN-LAST:event_formWindowClosing
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        setMenu(homePanel);
+    }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jLabel4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseEntered
+        setCursor(Cursor.HAND_CURSOR);
+    }//GEN-LAST:event_jLabel4MouseEntered
+
+    private void jLabel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseExited
+        setCursor(Cursor.DEFAULT_CURSOR);
+    }//GEN-LAST:event_jLabel4MouseExited
 
     private void throwError(Exception e, String errorTitle, int messageType) {
         JOptionPane optionPane = new JOptionPane(e.getMessage(), messageType);

@@ -21,22 +21,26 @@ public class Purchase extends javax.swing.JFrame {
     private MainWindow main;
     private Storage storage;
     private Cart cart;
+    private Wishlist wishlist;
     
     public Purchase() {
         initComponents();
         
     }
 
-    public void set(MainWindow main, Storage storage, Cart cart) {
+    public void set(MainWindow main, Storage storage, Cart cart, Wishlist wishlist) {
         this.main = main;
         this.storage = storage;
         this.cart = cart;
+        this.wishlist = wishlist;
     }
     
     private void purchase() {
         List<Product> chosenProducts = cart.getProducts();
         storage.purchase(chosenProducts);
+        wishlist.purchase(chosenProducts);
         cart.removeAll();
+        main.setCartTotal();
     }
     
     /**

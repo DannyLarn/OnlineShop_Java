@@ -5,7 +5,6 @@
  */
 package onlineshop;
 
-import java.awt.Dimension;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,7 +13,6 @@ import java.util.Iterator;
 import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -144,8 +142,6 @@ public class Storage extends Table {
             obj.put("available", product.getAvailable());
             
             totalList.add(obj);
-            
-            
         }
         JSONObject sum = new JSONObject();
         sum.put("total", cart.getTotal());
