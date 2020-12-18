@@ -140,8 +140,8 @@
                 <Property name="editable" type="boolean" value="true"/>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="2">
-                    <StringItem index="0" value="Nev"/>
-                    <StringItem index="1" value="Kategoria"/>
+                    <StringItem index="0" value="N&#xe9;v"/>
+                    <StringItem index="1" value="Kateg&#xf3;ria"/>
                   </StringArray>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -225,7 +225,7 @@
                   <Font name="Lucida Grande" size="36" style="0"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="K&#xed;v&#xe1;ns&#xe1;g lista"/>
+                <Property name="text" type="java.lang.String" value="Wishlist"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="wishlistTotal">
@@ -490,7 +490,7 @@
                       <Font name="Monaco" size="18" style="0"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="Kiv&#xe1;ns&#xe1;g lista"/>
+                    <Property name="text" type="java.lang.String" value="Wishlist"/>
                   </Properties>
                 </Component>
               </SubComponents>

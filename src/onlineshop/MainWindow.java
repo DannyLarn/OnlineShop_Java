@@ -122,7 +122,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         searchType.setEditable(true);
-        searchType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nev", "Kategoria" }));
+        searchType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Név", "Kategória" }));
         searchType.setToolTipText(null);
         searchType.setFocusable(false);
         searchType.addItemListener(new java.awt.event.ItemListener() {
@@ -179,7 +179,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Lucida Grande", 0, 36)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Kívánság lista");
+        jLabel6.setText("Wishlist");
 
         wishlistTotal.setBackground(new java.awt.Color(255, 255, 255));
         wishlistTotal.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
@@ -348,7 +348,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Monaco", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Kivánság lista");
+        jLabel1.setText("Wishlist");
 
         javax.swing.GroupLayout wishlistMenuPointLayout = new javax.swing.GroupLayout(wishlistMenuPoint);
         wishlistMenuPoint.setLayout(wishlistMenuPointLayout);

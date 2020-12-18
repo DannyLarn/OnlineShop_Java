@@ -64,7 +64,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="cartButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Kosarhoz"/>
+        <Property name="text" type="java.lang.String" value="Kos&#xe1;rhoz"/>
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
       <Events>
@@ -74,7 +74,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="whishlistButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Whishlist"/>
+        <Property name="text" type="java.lang.String" value="Wishlist"/>
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
       <Events>

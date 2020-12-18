@@ -63,7 +63,7 @@ public class StorageElement extends javax.swing.JPanel {
         setMaximumSize(new java.awt.Dimension(32767, 31));
         setSize(new java.awt.Dimension(622, 31));
 
-        cartButton.setText("Kosarhoz");
+        cartButton.setText("Kosárhoz");
         cartButton.setFocusable(false);
         cartButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -76,7 +76,7 @@ public class StorageElement extends javax.swing.JPanel {
             }
         });
 
-        whishlistButton.setText("Whishlist");
+        whishlistButton.setText("Wishlist");
         whishlistButton.setFocusable(false);
         whishlistButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -117,11 +117,11 @@ public class StorageElement extends javax.swing.JPanel {
         // exception if we have all the products in the cart what is available
         try {
             if (cart.quantityVerification(this.productPanel) || this.productPanel.getAvailable() == 0) {
-                throw new Exception("A kivalasztott termekbol nincs tobb.");
+                throw new Exception("A kiválasztott termékbol nincs több.");
             }
             cart.addToCart(productPanel);
         } catch (Exception e) {
-            throwError(e, "Keszlethiany", JOptionPane.ERROR_MESSAGE);
+            throwError(e, "Készlethiány", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_cartButtonMouseClicked
 
@@ -129,11 +129,11 @@ public class StorageElement extends javax.swing.JPanel {
         // exception if the product is already on the wishlist
         try {
             if (whishlist.find(this.getProductPanel())) {
-                throw new Exception("Ezt az elemet mar hozzaadta a listahoz!");
+                throw new Exception("Ezt az terméket már hozzáadta a listához!");
             } 
             whishlist.addToWishlist(productPanel);
         } catch (Exception e) {
-            throwError(e, "Ismetlodesi hiba", JOptionPane.ERROR_MESSAGE);
+            throwError(e, "Ismétlődés", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_whishlistButtonMouseClicked
 

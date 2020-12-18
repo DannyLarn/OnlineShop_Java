@@ -27,7 +27,6 @@ public class Purchase extends javax.swing.JFrame {
     // constructors:
     public Purchase() {
         initComponents();
-        
     }
     
     // set the needed variables
